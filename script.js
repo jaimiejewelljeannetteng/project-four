@@ -5,19 +5,18 @@ app.apiKeyEtsy = "rkcrycwnyei9ana141cxdioh";
 app.apiUrlEtsy = "https://openapi.etsy.com/v2/shops/polomocha/listings/active";
 app.userInput = ""; //empty var for user to enter city
 
-app.getWeather = toronto => {
+app.getWeather = location => {
   $.ajax({
     url: app.apiUrlWeather,
     method: "GET",
     dataType: "json",
     data: {
       key: app.apiKeyWeather,
-      q: "toronto"
+      q: location
     }
   }).then(function(response) {
     console.log(response);
     app.displayWeather(response);
-    // $('# from html').empty();
   });
 }; //app.getWeather ends here
 
@@ -31,16 +30,14 @@ app.displayWeather = function(data) {
     console.log(current);
     return `
             <div class="weatherDetails" >
-                <img src="${current.current.condition.icon}">
-                <h2>${current.location.name}</h2>
-                <h2>${current.current.condition.text}</h2>
-                <p>${current.current.temp_c}</p>
+                <h2>In ${current.location.name}, the weather is ${current.current.condition.text} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius</h2>
             </div>`;
     //   return app.currentHtml;
   });
   console.log(app.currentConditions);
 
-  $("#displayWeather").append(app.currentConditions);
+  $(".displayWeather").val('');
+  $(".displayWeather").html(app.currentConditions);
 
   //method - determine user's input - which would be the query
   // get data from API, print temperature, feels like, icon, to screen
@@ -54,6 +51,11 @@ app.init = () => {
   //onclick function for the input submit
   $("form").on("submit", function() {
     //When submitted, the value will get info from Weather & Etsy then show info on DOM
+    const location = $('#city').val() 
+    console.log(location)
+    app.getWeather(location)
+
+
 
     //get the value of input
     //async scroll down to show weather
@@ -109,7 +111,7 @@ app.init = () => {
 app.getEtsy = () => {
   //proxy
   $.ajax({
-    url: "http://proxy.hackeryou.com",
+      url: "https://corsproxy.github.io/",
     // url: app.apiUrlEtsy,
     method: "GET",
     dataType: "json",
