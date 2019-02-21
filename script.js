@@ -76,50 +76,61 @@ app.init = () => {
     //return top/bottom properties {top:shirt,bottom:pants}
 
     //compare temperature.If temperature > 0, return etsyA(includes jacket).If temperature < 0, return etsyB(includes coat)
-    // const params = app.getEtsyParams(temperature);
-    // app.getEtsyParams = temperature => {
-    //   let EtsyA = ["tshirt", "short pants"];
-    //   let EtsyB = ["coat", "long pants"];
-    //   if (temperature > 0) {
-    //     return EtsyA;
-    //   } else {
-    //     return EtsyB;
-    //   }
-    // };
+    // let temperature = 20;
+    // app.getEtsyParams(temperature);
+    app.getEtsyParams = temperature => {
+      let EtsyA = ["tshirt", "short pants"];
+      let EtsyB = ["coat", "long pants"];
+      if (temperature > 0) {
+        return EtsyA;
+      } else {
+        return EtsyB;
+      }
+    };
+    let temperature = 20;
+    let etsyParams = app.getEtsyParams(temperature);
+    console.log(etsyParams);
+    //[EtsyA]
     //once receive temperature, it will compare it with 0
     //if above 0'C, return Etsy A (Tshirt,Short Pants)
     //if below 0'C, return Etsy B (coat, Long Pants)
     //return top/bottom properties {top:shirt,bottom:pants}
     //take array and map through it and then query through the getEtsy API
     //e.g params = ['tshirt', 'short pant']
-    // const callParamTwice = app.callEtsyApiTwice(params);
-    // app.callEtsyApiTwice = params => {
-    //   params.forEach(query => {
-    //     //item will go through the getEtsy query
-    //     app.getEtsy(query);
-    //   });
-    // };
+    app.callEtsyApiTwice = param => {
+      param.forEach(query => {
+        //item will go through the getEtsy query
+        // app.getEtsy(query);
+        // return query;
+        console.log(query);
+        return query;
+      });
+    };
+
+    app.callEtsyApiTwice(etsyParams);
+    console.log(app.callEtsyApiTwice(etsyParams));
 
     //call api twice with top/bottom then return to DOM.
-    app.getEtsy();
+    let item = "animal";
+    app.getEtsy(item);
   });
 };
 
 //query the returned compareTemperature.
 // Etsy A argument will be used as keyword on getEtsy.
 //returned is then shown on the DOM
-app.getEtsy = jacket => {
+
+app.getEtsy = item => {
   //proxy
   $.ajax({
     url: "https://proxy.hackeryou.com",
-    // url: app.apiUrlEtsy,
     method: "GET",
     dataType: "json",
     data: {
       reqUrl: app.apiUrlEtsy,
       params: {
         api_key: app.apiKeyEtsy,
-        keywords: "jacket",
+        keywords: item,
         includes: "MainImage"
       }
     }
@@ -137,7 +148,9 @@ app.displayEtsy = data => {
   app.etsyImage = etsyArray.map(function(item) {
     // let top = item[0].MainImage.url_fullxfull;
     let top = item[0].MainImage.url_75x75;
+    let bottom = item[2].MainImage.url_75x75;
     $(".displayTop").append(`<img src="${top}" />`);
+    $(".displayTop").append(`<img src="${bottom}" />`);
   });
 };
 
