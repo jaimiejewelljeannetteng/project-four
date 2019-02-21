@@ -36,7 +36,7 @@ app.displayWeather = function(data) {
   });
   console.log(app.currentConditions);
 
-  $(".displayWeather").val('');
+
   $(".displayWeather").html(app.currentConditions);
 
   //method - determine user's input - which would be the query
@@ -54,6 +54,7 @@ app.init = () => {
     const location = $('#city').val() 
     console.log(location)
     app.getWeather(location)
+      $(".displayWeather").val('');
 
 
 
@@ -111,7 +112,7 @@ app.init = () => {
 app.getEtsy = () => {
   //proxy
   $.ajax({
-      url: "https://corsproxy.github.io/",
+      url: "https://proxy.hackeryou.com",
     // url: app.apiUrlEtsy,
     method: "GET",
     dataType: "json",
