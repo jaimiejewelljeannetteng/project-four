@@ -64,9 +64,6 @@ app.init = () => {
     //if below 0'C, return Etsy B (coat, Long Pants)
     //return top/bottom properties {top:shirt,bottom:pants}
 
-    //compare temperature.If temperature > 0, return etsyA(includes jacket).If temperature < 0, return etsyB(includes coat)
-    // app.getEtsyParams(temperature);
-
     app.callEtsyApiTwice = param => {
       let etsyQuery = param.map(query => {
         //item will go through the getEtsy query
@@ -77,7 +74,11 @@ app.init = () => {
       });
       $.when(...etsyQuery).then((...args) => {
         console.log(args);
-        args = args.map(item => console.log(item[0]));
+        let argsItem = args.map(item => {
+          // console.log("item: ", item);
+          console.log("item: ", item);
+          // console.log("item: ", item[0].results[0].MainImage.url_75x75);
+        });
       });
     };
     app.getEtsyParams = temperature => {
@@ -110,7 +111,6 @@ app.init = () => {
 
     let item = "animal";
     let getItem = app.getEtsy(item);
-    console.log("displayEtsy: ", getItem);
     getItem.then(response => {
       app.displayEtsy(response.results);
     });
