@@ -30,7 +30,7 @@ app.displayWeather = function(data) {
     console.log(current);
     return `
             <div class="weatherDetails" >
-                <h2>In ${
+                <h2 class="weatherSentence">In ${
                   current.location.name
                 }, the weather is ${current.current.condition.text} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius</h2>
             </div>`;
@@ -43,9 +43,15 @@ app.displayWeather = function(data) {
   // run error if input is blank
 };
 
+app.resetContainer = function () {
+  $('form input[type=text]').val('');
+  $('.weatherSentence').empty(''); 
+    console.log('reset')
+  }
+
 app.init = () => {
   app.getWeather();
-  $("form").on("submit", function() {
+  $('#submitButton').on("click", function() {
     //When submitted, the value will get info from Weather & Etsy then show info on DOM
     //get the value of input
     const location = $("#city").val();
@@ -53,6 +59,7 @@ app.init = () => {
     app.getWeather(location);
     //displayWeather will show the API data according to userInput to DOM
     $(".displayWeather").val("");
+
 
     //async scroll down to show weather
 
@@ -117,6 +124,12 @@ app.init = () => {
   });
 };
 
+app.handleReset = function () {
+  $('#reSubmitButton input[type=submit]').on('click', function() {
+    app.resetContainer();
+  })
+}
+
 //query the returned compareTemperature.
 // Etsy A argument will be used as keyword on getEtsy.
 //returned is then shown on the DOM
@@ -162,4 +175,5 @@ $("#generate").on("click", function() {
 });
 $(function() {
   app.init();
+  app.handleReset();
 }); // doc ready ends here
