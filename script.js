@@ -30,12 +30,13 @@ app.displayWeather = function(data) {
     console.log(current);
     return `
             <div class="weatherDetails" >
-                <h2>In ${current.location.name}, the weather is ${current.current.condition.text} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius</h2>
+                <h2>In ${
+                  current.location.name
+                }, the weather is ${current.current.condition.text} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius</h2>
             </div>`;
     //   return app.currentHtml;
   });
   console.log(app.currentConditions);
-
 
   $(".displayWeather").html(app.currentConditions);
 
@@ -51,12 +52,10 @@ app.init = () => {
   //onclick function for the input submit
   $("form").on("submit", function() {
     //When submitted, the value will get info from Weather & Etsy then show info on DOM
-    const location = $('#city').val() 
-    console.log(location)
-    app.getWeather(location)
-      $(".displayWeather").val('');
-
-
+    const location = $("#city").val();
+    console.log(location);
+    app.getWeather(location);
+    $(".displayWeather").val("");
 
     //get the value of input
     //async scroll down to show weather
@@ -109,24 +108,37 @@ app.init = () => {
 //query the returned compareTemperature.
 // Etsy A argument will be used as keyword on getEtsy.
 //returned is then shown on the DOM
-app.getEtsy = () => {
+app.getEtsy = jacket => {
   //proxy
   $.ajax({
-      url: "https://proxy.hackeryou.com",
+    url: "https://proxy.hackeryou.com",
     // url: app.apiUrlEtsy,
     method: "GET",
     dataType: "json",
     data: {
       reqUrl: app.apiUrlEtsy,
       params: {
-        api_key: app.apiKeyEtsy
-        // keywords: "jacket"
+        api_key: app.apiKeyEtsy,
+        keywords: "jacket",
+        includes: "MainImage"
       }
     }
   }).then(function(response) {
-    console.log(response);
+    let result = response.results;
+    app.displayEtsy(result);
   });
   //receive object
+};
+
+let etsyArray = [];
+app.displayEtsy = data => {
+  etsyArray.push(data);
+  console.log(data);
+  app.etsyImage = etsyArray.map(function(item) {
+    // let top = item[0].MainImage.url_fullxfull;
+    let top = item[0].MainImage.url_75x75;
+    $(".displayTop").append(`<img src="${top}" />`);
+  });
 };
 
 $("#generate").on("click", function() {
