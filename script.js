@@ -17,15 +17,15 @@ app.getWeather = location => {
   }).then(function(response) {
     console.log(response);
     app.displayWeather(response);
+    // get temperature from response
+    let temperature = response.current.temp_c;
+    app.getEtsyParams(temperature);
   });
 }; //app.getWeather ends here
 
 let weatherArray = [];
 app.displayWeather = function(data) {
-  console.log(data);
   weatherArray.push(data);
-  console.log("weatherArray: ", weatherArray);
-
   app.currentConditions = weatherArray.map(function(current) {
     console.log(current);
     return `
@@ -34,40 +34,29 @@ app.displayWeather = function(data) {
                   current.location.name
                 }, the weather is ${current.current.condition.text} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius</h2>
             </div>`;
-    //   return app.currentHtml;
   });
-  console.log(app.currentConditions);
 
   $(".displayWeather").html(app.currentConditions);
 
   //method - determine user's input - which would be the query
   // get data from API, print temperature, feels like, icon, to screen
   // run error if input is blank
-  //
 };
 
 app.init = () => {
   app.getWeather();
-  //attain api
-  //onclick function for the input submit
   $("form").on("submit", function() {
     //When submitted, the value will get info from Weather & Etsy then show info on DOM
+    //get the value of input
     const location = $("#city").val();
-    console.log(location);
+    //put userInput into app.getWeather
     app.getWeather(location);
+    //displayWeather will show the API data according to userInput to DOM
     $(".displayWeather").val("");
 
-    //get the value of input
     //async scroll down to show weather
 
-    //query to getWeather, await response because all subsequent
-    //logic depends on its result
     // const weather = await app.getWeather(location);
-
-    // get temperature from response
-    // const temperature = weather.temperature;
-
-    // compare temperature. If temperature>0, return etsyA(includes jacket). If temperature<0, return etsyB (includes coat)
 
     // const params = app.getEtsyParams(temperature);
     //once receive temperature, it will compare it with 0
@@ -76,43 +65,55 @@ app.init = () => {
     //return top/bottom properties {top:shirt,bottom:pants}
 
     //compare temperature.If temperature > 0, return etsyA(includes jacket).If temperature < 0, return etsyB(includes coat)
-    // let temperature = 20;
     // app.getEtsyParams(temperature);
+
+    app.callEtsyApiTwice = param => {
+      let etsyQuery = param.map(query => {
+        //item will go through the getEtsy query
+        // app.getEtsy(query);
+        // return query;
+        console.log(query);
+        return app.getEtsy(query);
+      });
+      $.when(...etsyQuery).then((...args) => {
+        console.log(args);
+        args = args.map(item => console.log(item[0]));
+      });
+    };
     app.getEtsyParams = temperature => {
       let EtsyA = ["tshirt", "short pants"];
       let EtsyB = ["coat", "long pants"];
       if (temperature > 0) {
-        return EtsyA;
+        app.callEtsyApiTwice(EtsyA);
       } else {
-        return EtsyB;
+        app.callEtsyApiTwice(EtsyB);
       }
     };
     let temperature = 20;
     let etsyParams = app.getEtsyParams(temperature);
     console.log(etsyParams);
+
     //[EtsyA]
     //once receive temperature, it will compare it with 0
     //if above 0'C, return Etsy A (Tshirt,Short Pants)
     //if below 0'C, return Etsy B (coat, Long Pants)
     //return top/bottom properties {top:shirt,bottom:pants}
     //take array and map through it and then query through the getEtsy API
-    //e.g params = ['tshirt', 'short pant']
-    app.callEtsyApiTwice = param => {
-      param.forEach(query => {
-        //item will go through the getEtsy query
-        // app.getEtsy(query);
-        // return query;
-        console.log(query);
-        return query;
-      });
-    };
+    //e.g etsyParams = ['tshirt', 'short pant']
+    // app.callEtsyApiTwice(etsyParams);
 
-    app.callEtsyApiTwice(etsyParams);
-    console.log(app.callEtsyApiTwice(etsyParams));
+    // let etsyselection = app.callEtsyApiTwice(etsyParams);
+    // console.log("etsyselection: ", etsyselection);
+    // console.log(app.callEtsyApiTwice(etsyParams));
 
     //call api twice with top/bottom then return to DOM.
+
     let item = "animal";
-    app.getEtsy(item);
+    let getItem = app.getEtsy(item);
+    console.log("displayEtsy: ", getItem);
+    getItem.then(response => {
+      app.displayEtsy(response.results);
+    });
   });
 };
 
@@ -122,7 +123,7 @@ app.init = () => {
 
 app.getEtsy = item => {
   //proxy
-  $.ajax({
+  return $.ajax({
     url: "https://proxy.hackeryou.com",
     method: "GET",
     dataType: "json",
@@ -134,10 +135,12 @@ app.getEtsy = item => {
         includes: "MainImage"
       }
     }
-  }).then(function(response) {
-    let result = response.results;
-    app.displayEtsy(result);
   });
+  // .then(function(response) {
+  //   console.log("response: ", response);
+  //   let result = response.results;
+  //   app.displayEtsy(result);
+  // });
   //receive object
 };
 
