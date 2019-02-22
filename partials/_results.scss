@@ -4,28 +4,31 @@
 //         <div class="displayBottom"></div>
 //         <a href="" id="generate">Generate</a>
 a {
-    padding: 25px;
-    background: $primaryFontColour;
-    color: black;
+  padding: 25px;
+  background: $primaryFontColour;
+  color: black;
 }
 
 .displayWeather,
 .displayOutfit {
-    display: flex;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+.displayOutfits {
+  width: 50%;
+  img {
+    width: 100%;
+  }
+}
 //  <section class="displayOutfit">
 //         <div class="displayTop"></div>
 //         <div class="displayBottom"></div>
 //         <a href="" id="generate">Generate</a>
 //       </section>
-
-
 #generate {
-    display: none;
+  display: none;
 }
