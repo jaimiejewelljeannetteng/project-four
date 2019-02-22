@@ -29,27 +29,19 @@ app.handleSubmit = () => {
   $(".displayWeather").val("");
 };
 
-app.smoothScroll = function() {
-  $("#submitButton").on("click", function() {
-    $("html, body").animate(
-      {
-        scrollTop: $(".displayWeather").offset().top
-      },
-      1000
-    );
-  });
-};
 // generate button is hidden on page load, show button on submit
 app.generateButton = function() {
-  $("#generate").show();
-  app.generateClick();
+  if ($("#city").val() !== "") {
+    $("#generate").show();
+    app.generateClick();
+  }
 };
+
 //Listen for click to refresh, and reload new clothing.
 app.generateClick = () => {
   $("#generate").on("click", function(e) {
     e.preventDefault();
     app.handleSubmit();
-    console.log("hi");
   });
 };
 
@@ -87,9 +79,22 @@ app.displayWeather = function(data) {
   });
 
   $(".displayWeather").html("");
-  $(".displayWeather").html(app.currentConditions);
+  $(".displayWeather").html(app.currentConditions)
+  $.when()
   app.smoothScroll();
 }; //app.displayWeather ends here
+
+
+app.smoothScroll = function () {
+  $("#submitButton").on("click", function () {
+    $("html, body").animate(
+      {
+        scrollTop: $(".displayWeather").offset().top
+      },
+      1000
+    );
+  });
+};
 
 //error handling, if user does not input city
 app.emptyInput = function() {
@@ -132,23 +137,19 @@ app.getEtsyParams = temperature => {
 //receive paramater (temperature) from app.getEtsyParams to call the etsy API twice
 app.callEtsyApiTwice = param => {
   let etsyQuery = param.map(query => {
-    console.log("query: ", query);
     return app.getEtsy(query);
   });
   $.when(...etsyQuery).then((...args) => {
     let argItem = args.map((item, index) => {
-      console.log(item);
       const i = Math.floor(Math.random() * item[0].results.length);
       return item[0].results[i].MainImage.url_fullxfull;
     });
-    console.log(argItem);
     app.displayEtsy(argItem); //
   });
 }; //callEtsyApiTwice ends here
 
 app.displayEtsy = item => {
   let itemDisplay = item.map((item, index) => {
-    console.log(item);
     return `<img src="${item}" id="clothing-${index} ">`;
   });
 
