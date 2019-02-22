@@ -67,30 +67,39 @@ app.init = () => {
     // const params = app.getEtsyParams(temperature);
     //once receive temperature, it will compare it with 0
     //if above 0'C, return Etsy A (Tshirt,Short Pants)
-    //if below 0'C, return Etsy B (coat, Long Pants)
+    //if below 0'C, return Etsy B (jacket,  Pants)
     //return top/bottom properties {top:shirt,bottom:pants}
 
+    //call api twice with top/bottom then return to DOM.
     app.callEtsyApiTwice = param => {
       let etsyQuery = param.map(query => {
-        //item will go through the getEtsy query
-        // app.getEtsy(query);
-        // return query;
         return app.getEtsy(query);
       });
       $.when(...etsyQuery).then((...args) => {
         let argItem = args.map(item => {
           return item[0].results[0].MainImage.url_75x75;
         });
+        console.log(argItem);
+        app.displayEtsy(argItem);
       });
     };
     app.getEtsyParams = temperature => {
-      let EtsyA = ["tshirt", "short pants"];
-      let EtsyB = ["coat", "long pants"];
+      let EtsyA = ["tshirt", "shorts"];
+      let EtsyB = ["sweater", "denim pants"];
       if (temperature > 0) {
         app.callEtsyApiTwice(EtsyA);
       } else {
         app.callEtsyApiTwice(EtsyB);
       }
+    };
+    app.displayEtsy = item => {
+      let itemDisplay = item.map(item => {
+        console.log(item);
+        return `<img src="${item}">`;
+      });
+
+      $(".displayTop").html("");
+      $(".displayTop").append(itemDisplay);
     };
 
     //[EtsyA]
@@ -105,13 +114,6 @@ app.init = () => {
     // let etsyselection = app.callEtsyApiTwice(etsyParams);
     // console.log("etsyselection: ", etsyselection);
     // console.log(app.callEtsyApiTwice(etsyParams));
-
-    //call api twice with top/bottom then return to DOM.
-    let item = "animal";
-    let getItem = app.getEtsy(item);
-    getItem.then(response => {
-      app.displayEtsy(response.results);
-    });
   });
 };
 
