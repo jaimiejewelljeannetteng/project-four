@@ -73,11 +73,14 @@ app.init = () => {
     //call api twice with top/bottom then return to DOM.
     app.callEtsyApiTwice = param => {
       let etsyQuery = param.map(query => {
+        console.log("query: ", query);
         return app.getEtsy(query);
       });
       $.when(...etsyQuery).then((...args) => {
-        let argItem = args.map(item => {
-          return item[0].results[0].MainImage.url_75x75;
+        let argItem = args.map((item, index) => {
+          console.log(item);
+          const i = Math.floor(Math.random() * item[0].results.length);
+          return item[0].results[i].MainImage.url_75x75;
         });
         console.log(argItem);
         app.displayEtsy(argItem);
