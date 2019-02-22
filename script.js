@@ -46,30 +46,31 @@ app.displayWeather = function(data) {
   // run error if input is blank
 }; //app.displayWeather ends here
 
+//error handling, if user does not input city
 app.emptyInput = function() {
   if ($('#city').val() === '') {
     console.log("reset");
     Swal.fire({
       title: 'Error!',
-      text: 'Enter your question',
+      text: 'Enter city',
       type: 'error',
-      confirmButtonText: 'OK YEP'
+      confirmButtonText: 'OK'
     });
   };
-};
+}; //app.emptyInput ends here
 
-// app.handleEmptyInput = function () {
-//   $("#submitButton input[type=submit]").on("submit", function () {
-//     app.emptyInput();
-//   });
-// };
+app.handleEmptyInput = function () {
+  $("#submitButton").on("click", function () {
+    app.emptyInput();
+  });
+}; //event handler for on submit, specific to on submit  *** i think we need to rejig init and move the call app.callEtsyApiTwice outside of init, to make it global and then call it in init. is this proper name spaceing? question for helpcue *** 
 
 
 app.init = () => {
   app.getWeather();
   // app.handleEmptyInput();
   $("#submitButton").on("click", function() {
-    app.emptyInput();
+    app.handleEmptyInput();
     //When submitted, the value will get info from Weather & Etsy then show info on DOM
     
     //get the value of input
@@ -187,5 +188,4 @@ $("#generate").on("click", function() {
 });
 $(function() {
   app.init();
-  // app.handleEmptyInput();
 }); // doc ready ends here
