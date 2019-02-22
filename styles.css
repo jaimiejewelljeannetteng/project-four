@@ -306,6 +306,11 @@ a {
   -ms-flex-align: center;
   align-items: center; }
 
+.displayOutfits {
+  width: 50%; }
+  .displayOutfits img {
+    width: 100%; }
+
 #generate {
   display: none; }
 
