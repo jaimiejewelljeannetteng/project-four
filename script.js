@@ -5,6 +5,7 @@ app.apiKeyEtsy = "rkcrycwnyei9ana141cxdioh";
 app.apiUrlEtsy = "https://openapi.etsy.com/v2/shops/polomocha/listings/active";
 app.userInput = ""; //empty var for user to enter city
 
+//obtaining data from weather API
 app.getWeather = location => {
   $.ajax({
     url: app.apiUrlWeather,
@@ -15,16 +16,18 @@ app.getWeather = location => {
       q: location
     }
   }).then(function(response) {
+    //once data is received, display weather to DOM
     app.displayWeather(response);
     // get temperature from response
     let temperature = response.current.temp_c;
+    //call app.getEtsyParams and pass it the temperature from weather API
     app.getEtsyParams(temperature);
   });
 }; //app.getWeather ends here
 
 let weatherArray = [];
 app.displayWeather = function(data) {
-  weatherArray.pop();
+  weatherArray.pop(); //remove content from weatherArray on each call to API (on additional submit)
   weatherArray.push(data);
   app.currentConditions = weatherArray.map(function(current) {
     return `
@@ -33,7 +36,7 @@ app.displayWeather = function(data) {
                   current.location.name
                 }, the weather is ${current.current.condition.text} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius</h2>
             </div>`;
-  });
+  }); 
 
   $(".displayWeather").html("");
   $(".displayWeather").html(app.currentConditions);
@@ -41,18 +44,34 @@ app.displayWeather = function(data) {
   //method - determine user's input - which would be the query
   // get data from API, print temperature, feels like, icon, to screen
   // run error if input is blank
+}; //app.displayWeather ends here
+
+app.emptyInput = function() {
+  if ($('#city').val() === '') {
+    console.log("reset");
+    Swal.fire({
+      title: 'Error!',
+      text: 'Enter your question',
+      type: 'error',
+      confirmButtonText: 'OK YEP'
+    });
+  };
 };
 
-app.resetContainer = function() {
-  $("form input[type=text]").val("");
-  $(".weatherSentence").empty("");
-  console.log("reset");
-};
+// app.handleEmptyInput = function () {
+//   $("#submitButton input[type=submit]").on("submit", function () {
+//     app.emptyInput();
+//   });
+// };
+
 
 app.init = () => {
   app.getWeather();
+  // app.handleEmptyInput();
   $("#submitButton").on("click", function() {
+    app.emptyInput();
     //When submitted, the value will get info from Weather & Etsy then show info on DOM
+    
     //get the value of input
     const location = $("#city").val();
     //put userInput into app.getWeather
@@ -120,11 +139,6 @@ app.init = () => {
   });
 };
 
-app.handleReset = function() {
-  $("#reSubmitButton input[type=submit]").on("click", function() {
-    app.resetContainer();
-  });
-};
 
 //query the returned compareTemperature.
 // Etsy A argument will be used as keyword on getEtsy.
@@ -173,5 +187,5 @@ $("#generate").on("click", function() {
 });
 $(function() {
   app.init();
-  app.handleReset();
+  // app.handleEmptyInput();
 }); // doc ready ends here

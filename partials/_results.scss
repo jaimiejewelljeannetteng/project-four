@@ -3,6 +3,12 @@
 //         <div class="displayTop"></div>
 //         <div class="displayBottom"></div>
 //         <a href="" id="generate">Generate</a>
+a {
+    padding: 25px;
+    background: $primaryFontColour;
+    color: black;
+}
+
 .displayWeather,
 .displayOutfit {
     display: flex;

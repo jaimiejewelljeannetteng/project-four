@@ -13,13 +13,13 @@
     </header>
     <main>
       <form action="#" method="GET" id="userInput">
-        <label for="city">Enter your city</label>
+        <label for="city" class="visuallyHidden">Enter your city</label>
         <input type="text" placeholder="enter city" id="city" />
-        <label for="submitButton">Submit your city</label>
+        <label for="submitButton" class="visuallyHidden">Submit your city</label>
         <input type="submit" id="submitButton" />
 
-        <label for="resubmitButton">Reset Form</label>
-        <input type="submit" id="resubmitButton" value="Reset Form" />
+        <!-- <label for="resubmitButton">Reset Form</label>
+        <input type="submit" id="resubmitButton" value="Reset Form" /> -->
       </form>
       <section class="displayWeather"></section>
       <section class="displayOutfit">
@@ -34,6 +34,10 @@
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
       crossorigin="anonymous"
     ></script>
+
+    <!-- sweet alerts 2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.1.0/dist/sweetalert2.all.min.js"></script>
+    
     <script src="script.js"></script>
   </body>
 </html>

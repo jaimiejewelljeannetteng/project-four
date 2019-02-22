@@ -212,6 +212,9 @@ body {
   max-width: 1600px;
   margin: 0 10%; }
 
+a {
+  text-decoration: none; }
+
 header {
   border: 2px solid purple;
   height: 10vh;
@@ -280,6 +283,11 @@ form [type="text"] {
 form [type="submit"] {
   border: 2px solid pink;
   width: 15%; }
+
+a {
+  padding: 25px;
+  background: white;
+  color: black; }
 
 .displayWeather,
 .displayOutfit {
