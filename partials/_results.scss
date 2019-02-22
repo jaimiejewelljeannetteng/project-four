@@ -19,11 +19,13 @@ a {
 }
 
 .displayOutfits {
-  width: 50%;
+  display: flex;
+  flex-direction: column;
   img {
-    width: 100%;
+    height: 300px;
   }
 }
+
 //  <section class="displayOutfit">
 //         <div class="displayTop"></div>
 //         <div class="displayBottom"></div>
