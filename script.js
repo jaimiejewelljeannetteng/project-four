@@ -2,6 +2,7 @@ const app = {};
 app.apiKeyWeather = "8f6dab90acf14f9da11221736191902";
 app.apiUrlWeather = "http://api.apixu.com/v1/current.json";
 app.apiKeyEtsy = "rkcrycwnyei9ana141cxdioh";
+// app.apiKeyEtsy = " xjgnf5lk3m3ruxemnnsz5knp" //backup key
 app.apiUrlEtsy = "https://openapi.etsy.com/v2/shops/polomocha/listings/active";
 app.userInput = ""; //empty var for user to enter city
 
@@ -104,8 +105,6 @@ app.callEtsyApiTwice = param => {
   });
 }; //callEtsyApiTwice ends here
 
-
-
 app.displayEtsy = item => {
   let itemDisplay = item.map(item => {
     console.log(item);
@@ -115,8 +114,6 @@ app.displayEtsy = item => {
   $(".displayTop").html("");
   $(".displayTop").append(itemDisplay);
 };
-
-
 
 app.getEtsy = item => {
   //proxy
@@ -146,7 +143,7 @@ app.displayEtsy = data => {
 
     $(".displayTop").html("");
     $(".displayTop").append(`<img src="${top}" />`);
-    $(".displayTop").append(`<img src="${bottom}" />`);
+    $(".displayBottom").append(`<img src="${bottom}" />`);
   });
 };
 
