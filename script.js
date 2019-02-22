@@ -25,7 +25,7 @@ app.getWeather = location => {
   });
 }; //app.getWeather ends here
 
-let weatherArray = [];
+let weatherArray = []; 
 app.displayWeather = function(data) {
   weatherArray.pop(); //remove content from weatherArray on each call to API (on additional submit)
   weatherArray.push(data);
@@ -40,16 +40,11 @@ app.displayWeather = function(data) {
 
   $(".displayWeather").html("");
   $(".displayWeather").html(app.currentConditions);
-
-  //method - determine user's input - which would be the query
-  // get data from API, print temperature, feels like, icon, to screen
-  // run error if input is blank
 }; //app.displayWeather ends here
 
 //error handling, if user does not input city
 app.emptyInput = function() {
   if ($('#city').val() === '') {
-    console.log("reset");
     Swal.fire({
       title: 'Error!',
       text: 'Enter city',
@@ -65,85 +60,63 @@ app.handleEmptyInput = function () {
   });
 }; //event handler for on submit, specific to on submit  *** i think we need to rejig init and move the call app.callEtsyApiTwice outside of init, to make it global and then call it in init. is this proper name spaceing? question for helpcue *** 
 
+// generate button is hidden on page load, show button on submit
+app.generateButton = function () {
+  $("#submitButton").on("click", function () {
+    $('#generate').show();
+  })
+}
 
-app.init = () => {
-  app.getWeather();
-  // app.handleEmptyInput();
-  $("#submitButton").on("click", function() {
-    app.handleEmptyInput();
-    //When submitted, the value will get info from Weather & Etsy then show info on DOM
-    
-    //get the value of input
-    const location = $("#city").val();
-    //put userInput into app.getWeather
-    app.getWeather(location);
-    //displayWeather will show the API data according to userInput to DOM
-    $(".displayWeather").val("");
+//app.getValue gets the value of the users input, sends it to app.getWeather
+app.getValue = function () {
+  app.location = $("#city").val();
+  app.getWeather(app.location);
+}
 
-    //async scroll down to show weather
 
-    // const weather = await app.getWeather(location);
+//once receive temperature, it will compare it with 0
+//if above 0'C, return Etsy A (Tshirt,Short Pants)
+//if below 0'C, return Etsy B (jacket,  Pants)
+app.getEtsyParams = temperature => {
+  let EtsyA = ["tshirt", "shorts"];
+  let EtsyB = ["sweater", "denim pants"];
+  if (temperature > 0) {
+    app.callEtsyApiTwice(EtsyA);
+  } else {
+    app.callEtsyApiTwice(EtsyB);
+  }
+};
 
-    // const params = app.getEtsyParams(temperature);
-    //once receive temperature, it will compare it with 0
-    //if above 0'C, return Etsy A (Tshirt,Short Pants)
-    //if below 0'C, return Etsy B (jacket,  Pants)
-    //return top/bottom properties {top:shirt,bottom:pants}
-
-    //call api twice with top/bottom then return to DOM.
-    app.callEtsyApiTwice = param => {
-      let etsyQuery = param.map(query => {
-        console.log("query: ", query);
-        return app.getEtsy(query);
-      });
-      $.when(...etsyQuery).then((...args) => {
-        let argItem = args.map((item, index) => {
-          console.log(item);
-          const i = Math.floor(Math.random() * item[0].results.length);
-          return item[0].results[i].MainImage.url_75x75;
-        });
-        console.log(argItem);
-        app.displayEtsy(argItem);
-      });
-    };
-    app.getEtsyParams = temperature => {
-      let EtsyA = ["tshirt", "shorts"];
-      let EtsyB = ["sweater", "denim pants"];
-      if (temperature > 0) {
-        app.callEtsyApiTwice(EtsyA);
-      } else {
-        app.callEtsyApiTwice(EtsyB);
-      }
-    };
-    app.displayEtsy = item => {
-      let itemDisplay = item.map(item => {
-        console.log(item);
-        return `<img src="${item}">`;
-      });
-
-      $(".displayTop").html("");
-      $(".displayTop").append(itemDisplay);
-    };
-
-    //[EtsyA]
-    //once receive temperature, it will compare it with 0
-    //if above 0'C, return Etsy A (Tshirt,Short Pants)
-    //if below 0'C, return Etsy B (coat, Long Pants)
-    //return top/bottom properties {top:shirt,bottom:pants}
-    //take array and map through it and then query through the getEtsy API
-    //e.g etsyParams = ['tshirt', 'short pant']
-    // app.callEtsyApiTwice(etsyParams);
-
-    // let etsyselection = app.callEtsyApiTwice(etsyParams);
-    // console.log("etsyselection: ", etsyselection);
-    // console.log(app.callEtsyApiTwice(etsyParams));
+//receive paramater (temperature) from app.getEtsyParams to call the etsy API twice
+app.callEtsyApiTwice = param => {
+  let etsyQuery = param.map(query => {
+    console.log("query: ", query);
+    return app.getEtsy(query);
   });
+  $.when(...etsyQuery).then((...args) => {
+    let argItem = args.map((item, index) => {
+      console.log(item);
+      const i = Math.floor(Math.random() * item[0].results.length);
+      return item[0].results[i].MainImage.url_75x75;
+    });
+    console.log(argItem);
+    app.displayEtsy(argItem); //
+  });
+}; //callEtsyApiTwice ends here
+
+
+
+app.displayEtsy = item => {
+  let itemDisplay = item.map(item => {
+    console.log(item);
+    return `<img src="${item}">`;
+  });
+
+  $(".displayTop").html("");
+  $(".displayTop").append(itemDisplay);
 };
 
 
-//query the returned compareTemperature.
-// Etsy A argument will be used as keyword on getEtsy.
-//returned is then shown on the DOM
 
 app.getEtsy = item => {
   //proxy
@@ -160,12 +133,6 @@ app.getEtsy = item => {
       }
     }
   });
-  // .then(function(response) {
-  //   console.log("response: ", response);
-  //   let result = response.results;
-  //   app.displayEtsy(result);
-  // });
-  //receive object
 };
 
 let etsyArray = [];
@@ -186,6 +153,20 @@ app.displayEtsy = data => {
 $("#generate").on("click", function() {
   //call api twice with top/bottom then return to DOM.
 });
+
+app.init = () => {
+  app.getWeather(); //calling 
+  // app.handleEmptyInput();
+  $("#submitButton").on("click", function () { //proper name spacing?
+    app.handleEmptyInput(); //calling
+    app.getValue();
+    //displayWeather will show the API data according to userInput to DOM *** ask about namespacing
+    $(".displayWeather").val("");
+  });
+
+  app.generateButton();
+};
+
 $(function() {
   app.init();
 }); // doc ready ends here
