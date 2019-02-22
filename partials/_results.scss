@@ -1,0 +1,20 @@
+// <section class="displayWeather"></section>
+//       <section class="displayOutfit">
+//         <div class="displayTop"></div>
+//         <div class="displayBottom"></div>
+//         <a href="" id="generate">Generate</a>
+.displayWeather,
+.displayOutfit {
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+//  <section class="displayOutfit">
+//         <div class="displayTop"></div>
+//         <div class="displayBottom"></div>
+//         <a href="" id="generate">Generate</a>
+//       </section>

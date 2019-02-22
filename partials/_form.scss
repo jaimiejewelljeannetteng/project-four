@@ -1,0 +1,45 @@
+.formContainer {
+    height: calc(100vh - 10vh);
+    border: 2px solid yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10% 0;
+    border: 2px solid red;
+    color: $primaryFontColour;
+}
+
+form {
+    [type="text"],
+    [type="submit"] {
+        height: 50px;
+        margin: 2% 0;   
+    }
+    
+    [type="text"] {
+    border: 2px solid blue;
+    width: 50%;
+    background: $primaryBgColour;
+    padding-left: 15px;
+    border: 2px solid $primaryFontColour;
+    color: $primaryFontColour;
+    letter-spacing:2px;
+    
+
+    }
+
+    [type="submit"] {
+        border: 2px solid pink;
+        // width: 200px;
+        width: 15%
+    }
+}

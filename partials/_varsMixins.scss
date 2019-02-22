@@ -1,0 +1,15 @@
+$primaryFont: sans-serif;
+$primaryBgColour: linear-gradient(#d66d75, #e29587);
+$primaryFontColour: white;
+$primaryAccent: turquoise;
+
+
+@mixin fontSize($sizeValue){
+  font-size: $sizeValue * 1px;
+  font-size: ($sizeValue/20) * 1rem;
+}
+
+@mixin lineHeight($heightValue){
+  line-height: $heightValue * 1.6;
+  line-height: ($heightValue/20) * 1.6rem;
+}

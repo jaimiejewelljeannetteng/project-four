@@ -1,0 +1,14 @@
+header {
+    border: 2px solid purple;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+}
+
+h1 {
+    @include fontSize(42);
+    // padding: 5%;
+    margin: 0;
+    border: 2px solid turquoise;
+    
+}

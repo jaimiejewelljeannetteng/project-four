@@ -1,0 +1,14 @@
+body {
+    background-image: $primaryBgColour;
+    color: $primaryFontColour;
+    font-family: $primaryFont;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: space-between;
+}
+
+.wrapper {
+    max-width: 1600px;
+    margin: 0 10%;
+}
