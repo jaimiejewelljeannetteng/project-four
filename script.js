@@ -5,6 +5,54 @@ app.apiKeyEtsy = "xjgnf5lk3m3ruxemnnsz5knp";
 app.apiUrlEtsy = "https://openapi.etsy.com/v2/shops/polomocha/listings/active";
 app.userInput = ""; //empty var for user to enter city
 
+$(function() {
+  app.init();
+}); // doc ready ends here
+
+app.init = () => {
+  app.onSubmit();
+};
+
+//Listen for an onclick for the submit button
+app.onSubmit = () => {
+  $("#submitButton").on("click", function() {
+    app.handleSubmit();
+    app.generateButton();
+  });
+};
+
+//If there is error, sweetalert is presented. If there is no error, start retrieving API
+app.handleSubmit = () => {
+  app.handleEmptyInput();
+  app.getValueOfUserInput();
+  //displayWeather will show the API data according to userInput to DOM
+  $(".displayWeather").val("");
+};
+
+app.smoothScroll = function() {
+  $("#submitButton").on("click", function() {
+    $("html, body").animate(
+      {
+        scrollTop: $(".displayWeather").offset().top
+      },
+      1000
+    );
+  });
+};
+// generate button is hidden on page load, show button on submit
+app.generateButton = function() {
+  $("#generate").show();
+  app.generateClick();
+};
+//Listen for click to refresh, and reload new clothing.
+app.generateClick = () => {
+  $("#generate").on("click", function(e) {
+    e.preventDefault();
+    app.handleSubmit();
+    console.log("hi");
+  });
+};
+
 //obtaining data from weather API
 app.getWeather = location => {
   $.ajax({
@@ -25,11 +73,11 @@ app.getWeather = location => {
   });
 }; //app.getWeather ends here
 
-let weatherArray = [];
+app.weatherArray = [];
 app.displayWeather = function(data) {
-  weatherArray.pop(); //remove content from weatherArray on each call to API (on additional submit)
-  weatherArray.push(data);
-  app.currentConditions = weatherArray.map(function(current) {
+  app.weatherArray.pop(); //remove content from weatherArray on each call to API (on additional submit)
+  app.weatherArray.push(data);
+  app.currentConditions = app.weatherArray.map(function(current) {
     return `
             <div class="weatherDetails" >
                 <h2 class="weatherSentence">In ${
@@ -40,6 +88,7 @@ app.displayWeather = function(data) {
 
   $(".displayWeather").html("");
   $(".displayWeather").html(app.currentConditions);
+  app.smoothScroll();
 }; //app.displayWeather ends here
 
 //error handling, if user does not input city
@@ -56,21 +105,13 @@ app.emptyInput = function() {
 
 app.handleEmptyInput = function() {
   $("#submitButton").on("click", function(e) {
-    e.preventDefault()
+    e.preventDefault();
     app.emptyInput();
   });
 }; //event handler for on submit, specific to on submit  *** i think we need to rejig init and move the call app.callEtsyApiTwice outside of init, to make it global and then call it in init. is this proper name spaceing? question for helpcue ***
 
-// generate button is hidden on page load, show button on submit
-app.generateButton = function() {
-  $("#submitButton").on("click", function(e) {
-    e.preventDefault()
-    $("#generate").show();
-  });
-};
-
 //app.getValue gets the value of the users input, sends it to app.getWeather
-app.getValue = function() {
+app.getValueOfUserInput = function() {
   app.location = $("#city").val();
   app.getWeather(app.location);
 };
@@ -79,12 +120,12 @@ app.getValue = function() {
 //if above 0'C, return Etsy A (Tshirt,Short Pants)
 //if below 0'C, return Etsy B (jacket,  Pants)
 app.getEtsyParams = temperature => {
-  let EtsyA = ["tshirt", "shorts"];
-  let EtsyB = ["sweater", "denim pants"];
+  let aboveZeroWear = ["tshirt", "shorts"];
+  let belowZeroWear = ["sweater", "pants"];
   if (temperature > 0) {
-    app.callEtsyApiTwice(EtsyA);
+    app.callEtsyApiTwice(aboveZeroWear);
   } else {
-    app.callEtsyApiTwice(EtsyB);
+    app.callEtsyApiTwice(belowZeroWear);
   }
 };
 
@@ -108,7 +149,7 @@ app.callEtsyApiTwice = param => {
 app.displayEtsy = item => {
   let itemDisplay = item.map((item, index) => {
     console.log(item);
-    return `<img src="${item}" id="clothing-${index}">`;
+    return `<img src="${item}" id="clothing-${index} ">`;
   });
 
   $(".displayOutfits").html("");
@@ -131,33 +172,3 @@ app.getEtsy = item => {
     }
   });
 };
-
-
-app.generate = () => {
-  $("#generate").on("click", function (e) {
-    e.preventDefault()
-    app.getValue()
-    //on click of regenerate button
-    //resubmit current city,to generate different outfit choice
-  });
-}
-
-
-app.init = () => {
-  app.getWeather(); //calling
-  // app.handleEmptyInput();
-  $("#submitButton").on("click", function(e) {
-    e.preventDefault()
-    //proper name spacing?
-    app.handleEmptyInput(); //calling
-    app.getValue();
-    //displayWeather will show the API data according to userInput to DOM *** ask about namespacing
-    $(".displayWeather").val("");
-  });
-
-  app.generateButton();
-};
-
-$(function() {
-  app.init();
-}); // doc ready ends here
