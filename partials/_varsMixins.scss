@@ -2,6 +2,10 @@ $primaryFont: sans-serif;
 $primaryBgColour: linear-gradient(#d66d75, #e29587);
 $primaryFontColour: white;
 $primaryAccent: turquoise;
+$displayFont: 'Rubik', sans-serif;
+$bodyFont: 'Karla', sans-serif;
+
+
 
 
 @mixin fontSize($sizeValue){

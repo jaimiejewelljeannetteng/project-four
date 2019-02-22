@@ -81,7 +81,7 @@ app.displayWeather = function(data) {
   $(".displayWeather").html("");
   $(".displayWeather").html(app.currentConditions)
   $.when()
-  app.smoothScroll();
+  
 }; //app.displayWeather ends here
 
 
@@ -133,6 +133,7 @@ app.getEtsyParams = temperature => {
     app.callEtsyApiTwice(belowZeroWear);
   }
 };
+app.imageArray = [];
 
 //receive paramater (temperature) from app.getEtsyParams to call the etsy API twice
 app.callEtsyApiTwice = param => {
@@ -142,11 +143,19 @@ app.callEtsyApiTwice = param => {
   $.when(...etsyQuery).then((...args) => {
     let argItem = args.map((item, index) => {
       const i = Math.floor(Math.random() * item[0].results.length);
-      return item[0].results[i].MainImage.url_fullxfull;
-    });
-    app.displayEtsy(argItem); //
-  });
+      app.imageArray.push(item[0].results[i].MainImage.url_fullxfull)
+      // return item[0].results[i].MainImage.url_fullxfull;
+    })
+    
+    // display images once there are two in the array
+    if(app.imageArray.length === 2){
+      app.displayEtsy(app.imageArray); 
+      app.smoothScroll();
+    }
+
+  })
 }; //callEtsyApiTwice ends here
+
 
 app.displayEtsy = item => {
   let itemDisplay = item.map((item, index) => {
@@ -154,7 +163,8 @@ app.displayEtsy = item => {
   });
 
   $(".displayOutfits").html("");
-  $(".displayOutfits").append(itemDisplay);
+  $(".displayOutfits").append(itemDisplay)
+  $("clothing-0").fadeIn("slow")
 };
 
 app.getEtsy = item => {

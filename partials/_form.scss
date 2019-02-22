@@ -22,7 +22,8 @@ form {
     [type="text"],
     [type="submit"] {
         height: 50px;
-        margin: 2% 0;   
+        margin: 2% 0; 
+        font-family: $bodyFont;  
     }
     
     [type="text"] {

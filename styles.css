@@ -226,6 +226,7 @@ header {
   align-items: center; }
 
 h1 {
+  font-family: "Rubik", sans-serif;
   font-size: 42px;
   font-size: 2.1rem;
   margin: 0;
@@ -266,7 +267,8 @@ form {
 form [type="text"],
 form [type="submit"] {
   height: 50px;
-  margin: 2% 0; }
+  margin: 2% 0;
+  font-family: "Karla", sans-serif; }
 
 form [type="text"] {
   border: 2px solid blue;
