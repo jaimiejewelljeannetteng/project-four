@@ -15,7 +15,6 @@ app.getWeather = location => {
       q: location
     }
   }).then(function(response) {
-    console.log(response);
     app.displayWeather(response);
     // get temperature from response
     let temperature = response.current.temp_c;
@@ -25,9 +24,9 @@ app.getWeather = location => {
 
 let weatherArray = [];
 app.displayWeather = function(data) {
+  weatherArray.pop();
   weatherArray.push(data);
   app.currentConditions = weatherArray.map(function(current) {
-    console.log(current);
     return `
             <div class="weatherDetails" >
                 <h2 class="weatherSentence">In ${
@@ -36,6 +35,7 @@ app.displayWeather = function(data) {
             </div>`;
   });
 
+  $(".displayWeather").html("");
   $(".displayWeather").html(app.currentConditions);
 
   //method - determine user's input - which would be the query
@@ -43,15 +43,15 @@ app.displayWeather = function(data) {
   // run error if input is blank
 };
 
-app.resetContainer = function () {
-  $('form input[type=text]').val('');
-  $('.weatherSentence').empty(''); 
-    console.log('reset')
-  }
+app.resetContainer = function() {
+  $("form input[type=text]").val("");
+  $(".weatherSentence").empty("");
+  console.log("reset");
+};
 
 app.init = () => {
   app.getWeather();
-  $('#submitButton').on("click", function() {
+  $("#submitButton").on("click", function() {
     //When submitted, the value will get info from Weather & Etsy then show info on DOM
     //get the value of input
     const location = $("#city").val();
@@ -59,7 +59,6 @@ app.init = () => {
     app.getWeather(location);
     //displayWeather will show the API data according to userInput to DOM
     $(".displayWeather").val("");
-
 
     //async scroll down to show weather
 
@@ -76,15 +75,11 @@ app.init = () => {
         //item will go through the getEtsy query
         // app.getEtsy(query);
         // return query;
-        console.log(query);
         return app.getEtsy(query);
       });
       $.when(...etsyQuery).then((...args) => {
-        console.log(args);
-        let argsItem = args.map(item => {
-          // console.log("item: ", item);
-          console.log("item: ", item);
-          // console.log("item: ", item[0].results[0].MainImage.url_75x75);
+        let argItem = args.map(item => {
+          return item[0].results[0].MainImage.url_75x75;
         });
       });
     };
@@ -97,9 +92,6 @@ app.init = () => {
         app.callEtsyApiTwice(EtsyB);
       }
     };
-    let temperature = 20;
-    let etsyParams = app.getEtsyParams(temperature);
-    console.log(etsyParams);
 
     //[EtsyA]
     //once receive temperature, it will compare it with 0
@@ -115,7 +107,6 @@ app.init = () => {
     // console.log(app.callEtsyApiTwice(etsyParams));
 
     //call api twice with top/bottom then return to DOM.
-
     let item = "animal";
     let getItem = app.getEtsy(item);
     getItem.then(response => {
@@ -124,11 +115,11 @@ app.init = () => {
   });
 };
 
-app.handleReset = function () {
-  $('#reSubmitButton input[type=submit]').on('click', function() {
+app.handleReset = function() {
+  $("#reSubmitButton input[type=submit]").on("click", function() {
     app.resetContainer();
-  })
-}
+  });
+};
 
 //query the returned compareTemperature.
 // Etsy A argument will be used as keyword on getEtsy.
@@ -159,12 +150,14 @@ app.getEtsy = item => {
 
 let etsyArray = [];
 app.displayEtsy = data => {
+  etsyArray.pop();
   etsyArray.push(data);
-  console.log(data);
   app.etsyImage = etsyArray.map(function(item) {
     // let top = item[0].MainImage.url_fullxfull;
     let top = item[0].MainImage.url_75x75;
     let bottom = item[2].MainImage.url_75x75;
+
+    $(".displayTop").html("");
     $(".displayTop").append(`<img src="${top}" />`);
     $(".displayTop").append(`<img src="${bottom}" />`);
   });
