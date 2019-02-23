@@ -293,9 +293,6 @@ form [type="text"] {
   color: black;
   letter-spacing: 2px; }
 
-a {
-  padding: 25px; }
-
 .displayWeather,
 .displayOutfit {
   display: -webkit-box;
