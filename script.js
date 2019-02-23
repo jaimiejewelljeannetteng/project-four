@@ -45,8 +45,10 @@ app.smoothScroll = function() {
 };
 // generate button is hidden on page load, show button on submit
 app.generateButton = function() {
+  setTimeout(() => {
   $("#generate").show();
   $(".displayOutfit p").show();
+  }, 5000);
   app.generateClick();
 };
 //Listen for click to refresh, and reload new clothing.
@@ -107,8 +109,6 @@ app.emptyInput = function() {
     });
   }
 }; //app.emptyInput ends here
-
-//event handler for on submit, specific to on submit  *** i think we need to rejig init and move the call app.callEtsyApiTwice outside of init, to make it global and then call it in init. is this proper name spaceing? question for helpcue ***
 
 //app.getValue gets the value of the users input, sends it to app.getWeather
 app.getValueOfUserInput = function() {

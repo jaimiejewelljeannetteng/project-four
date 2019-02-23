@@ -28,9 +28,9 @@ $transitionDetail: .4s ease-in-out;
   @media(min-width: 900px) {@content};
 }
 
-// @mixin desktopSmall {
-//   @media (min-width: 1200px) {@content};
-// }
+@mixin desktopSmall {
+  @media (min-width: 1200px) {@content};
+}
 
 
 

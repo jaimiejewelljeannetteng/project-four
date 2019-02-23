@@ -1,6 +1,5 @@
 .weatherDetails {
     text-align: center;
-    border: 2px solid orange;
 }
 
 .displayWeather,
@@ -16,10 +15,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 2px solid pink;
   img {
     height: 300px;
-    border: 2px solid fuchsia;
   }
 }
 
@@ -42,13 +39,19 @@
  @include tabletSmall {
    .displayOutfits {
      flex-direction: row;
+     
      img {
        padding: 0 3%;
      }
   }
+
+   .weatherDetails {
+    @include fontSize(32)
+  }
 } //tabletSmall media query ends here
 
 @include tabletLarge {
+ 
   .displayOutfits {
     img {
       height: 400px;
