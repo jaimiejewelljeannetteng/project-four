@@ -13,6 +13,14 @@ app.init = () => {
   app.onSubmit();
 };
 
+app.smoothScroll = function() {
+  $("html, body").animate(
+    {
+      scrollTop: $(".displayWeather").offset().top
+    },
+    1000
+  );
+};
 //Listen for an onclick for the submit button
 app.onSubmit = () => {
   $("#submitButton").on("click", function(e) {
@@ -26,6 +34,11 @@ app.onSubmit = () => {
       app.emptyInput();
     }
   });
+};
+//app.getValue gets the value of the users input, sends it to app.getWeather
+app.getValueOfUserInput = function() {
+  app.location = $("#city").val();
+  app.getWeather(app.location);
 };
 
 //If there is error, sweetalert is presented. If there is no error, start retrieving API
@@ -110,18 +123,39 @@ app.emptyInput = function() {
   }
 }; //app.emptyInput ends here
 
+<<<<<<< HEAD
 //app.getValue gets the value of the users input, sends it to app.getWeather
 app.getValueOfUserInput = function() {
   app.location = $("#city").val();
   app.getWeather(app.location);
 };
+=======
+//event handler for on submit, specific to on submit  *** i think we need to rejig init and move the call app.callEtsyApiTwice outside of init, to make it global and then call it in init. is this proper name spaceing? question for helpcue ***
+>>>>>>> 742c952115a86d7c6aa25c79f209a838d92f784b
 
 //once receive temperature, it will compare it with 0
 //if above 0'C, return Etsy A (Tshirt,Short Pants)
 //if below 0'C, return Etsy B (jacket,  Pants)
 app.getEtsyParams = temperature => {
-  let aboveZeroWear = ["tshirt", "shorts"];
-  let belowZeroWear = ["sweater", "pants"];
+  let aboveZeroTopSelection = ["tshirt", "vests", "blazers", "light jackets"];
+  let aboveZeroTopRandomIndex = Math.floor(
+    Math.random() * aboveZeroTopSelection.length
+  );
+  let aboveZeroTopSelected = aboveZeroTopSelection[aboveZeroTopRandomIndex];
+  let aboveZeroBottomSelection = "shorts";
+
+  let belowZeroTopSelection = ["sweater", "long sleeve"];
+  let belowZeroTopRandomIndex = Math.floor(
+    Math.random() * belowZeroTopSelection.length
+  );
+  let belowZeroTopSelected = belowZeroTopSelection[belowZeroTopRandomIndex];
+  let belowZeroBottomSelection = "pants";
+
+  let aboveZeroWear = [aboveZeroTopSelected, aboveZeroBottomSelection];
+  console.log("aboveZeroWear: ", aboveZeroWear);
+  let belowZeroWear = [belowZeroTopSelected, belowZeroBottomSelection];
+  console.log("belowZeroWear: ", belowZeroWear);
+
   if (temperature > 0) {
     app.callEtsyApiTwice(aboveZeroWear);
   } else {
@@ -139,19 +173,27 @@ app.callEtsyApiTwice = param => {
     let argItem = args.map((item, index) => {
       console.log(item);
       const i = Math.floor(Math.random() * item[0].results.length);
-      return item[0].results[i].MainImage.url_fullxfull;
+      let etsyImage = item[0].results[i].MainImage.url_fullxfull;
+      let etsyTitle = item[0].results[i].title;
+      let etsyUrl = item[0].results[i].url;
+      let getEtsyInfo = { etsyImage, etsyTitle, etsyUrl };
+      return getEtsyInfo;
     });
     console.log(argItem);
-    app.displayEtsy(argItem); //
+    app.displayEtsy(argItem);
   });
 }; //callEtsyApiTwice ends here
 
-app.displayEtsy = item => {
-  let itemDisplay = item.map((item, index) => {
-    console.log(item);
-    return `<img src="${item}" id="clothing-${index} ">`;
-  });
-
+app.displayEtsy = items => {
+  let itemDisplay = items.reduce(
+    (html, { etsyImage, etsyTitle, etsyUrl }, index) => {
+      console.log(items, index);
+      let image = `<img src="${etsyImage}" id="clothing-${index}-item " alt="${etsyTitle}">`;
+      let itemUrl = `<a href="${etsyUrl}">${image}</a>`;
+      return html + itemUrl;
+    },
+    ""
+  );
   $(".displayOutfits").html("");
   $(".displayOutfits").append(itemDisplay);
 };
@@ -166,7 +208,7 @@ app.getEtsy = item => {
       reqUrl: app.apiUrlEtsy,
       params: {
         api_key: app.apiKeyEtsy,
-        tags: item,
+        category: "clothing/women/" + item,
         includes: "MainImage"
       }
     }
