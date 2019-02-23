@@ -35,4 +35,8 @@ form {
             color: $secondaryColour;
         }
     }
+
+    [type="submit"] {
+        border: none;
+    }
 } 

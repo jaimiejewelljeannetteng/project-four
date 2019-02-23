@@ -1,5 +1,9 @@
 .weatherDetails {
-  text-align: center;
+  text-align: left;
+
+  span {
+    color: $primaryAccent;
+  }
 }
 
 .displayWeather,
@@ -14,8 +18,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   a {
     position: relative;
+    margin: 25px;
     .overlay {
       display: none;
       position: absolute;
@@ -25,36 +31,42 @@
       right: 0;
       background: linear-gradient( to left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
     }
+
     img {
       height: 300px;
+      min-width: 100%;
     }
   }
+}
+    
   a:hover {
     box-shadow: 5px 5px 5px 5px lightgrey;
-    .overlay {
+  .overlay {
+    display: block;
+    p {
       display: block;
-      p {
-        text-align: center;
-        top: 50%;
-        width: 100%;
-        position: absolute;
-        color: $primaryColour;
-        @include fontSize(25);
-        margin: 0;
-      }
+      text-align: center;
+      top: 50%;
+      width: 100%;
+      position: absolute;
+      color: $primaryColour;
+      @include fontSize(25);
+      margin: 0;
     }
   }
+}
+
   #generate {
     display: none;
-    margin-top: 25px;
-    padding: 15px;
+    margin: 25px 0;
+    padding: 25px;
   }
   .displayOutfit p {
     @include fontSize(18);
     display: none;
     width: 100%;
-    text-align: right;
-    margin: 0;
+    text-align: center;
+    margin: 10px 0;
   } //general displayWeather & displayOutfit styling ends here
   //media queries begin here
   @include tabletSmall {
@@ -67,18 +79,19 @@
       @include fontSize(32);
     }
   } //tabletSmall media query ends here
+
   @include tabletLarge {
-    .displayOutfits {
+    .displayOutfits a {
       img {
         height: 400px;
       }
     }
   } //tabletLarge media query ends here
+  
   @include desktopSmall {
-    a {
+    .displayOutfits a {
       img {
         height: 500px;
       }
     }
-  }
-}
+  } //desktopSmall ends here

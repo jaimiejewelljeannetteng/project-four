@@ -60,8 +60,8 @@ app.smoothScroll = function() {
 app.generateButton = function() {
   setTimeout(() => {
   $("#generate").show();
-  $(".displayOutfit .disclaimer").show();
-  }, 5000);
+  $(".disclaimer").show();
+  }, 3000);
   app.generateClick();
 };
 //Listen for click to refresh, and reload new clothing.
@@ -99,11 +99,13 @@ app.displayWeather = function(data) {
   app.weatherArray.pop(); //remove content from weatherArray on each call to API (on additional submit)
   app.weatherArray.push(data);
   app.currentConditions = app.weatherArray.map(function(current) {
+    let getCurrentConditionText = current.current.condition.text
+    let CurrentConditionText = getCurrentConditionText.toLowerCase()
     return `
             <div class="weatherDetails" >
-                <h2 class="weatherSentence">In ${
+                <h2 class="weatherSentence">In <span> ${
                   current.location.name
-                }, the weather is ${current.current.condition.text} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius</h2>
+      }</span>, the weather is ${CurrentConditionText} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius. Checkout your outfit below:</h2>
             </div>`;
   });
 
@@ -191,7 +193,10 @@ app.displayEtsy = items => {
     ""
   );
   $(".displayOutfits").html("");
-  $(".displayOutfits").append(itemDisplay);
+  $(".displayOutfits").append(itemDisplay)
+    .delay(1000)
+    .hide()
+    .fadeIn();
 };
 
 app.getEtsy = item => {
