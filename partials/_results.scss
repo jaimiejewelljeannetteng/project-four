@@ -1,10 +1,9 @@
 .weatherDetails {
-    text-align: center;
+  text-align: center;
 }
 
 .displayWeather,
 .displayOutfit {
-  display: flex;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,63 +15,70 @@
   flex-direction: column;
   justify-content: center;
   a {
+    position: relative;
+    .overlay {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient( to left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+    }
     img {
-    height: 300px;  
-    padding: 25px;
+      height: 300px;
     }
   }
-  
   a:hover {
-    background-color: red;
-    img:hover {
     box-shadow: 5px 5px 5px 5px lightgrey;
+    .overlay {
+      display: block;
+      p {
+        text-align: center;
+        top: 50%;
+        width: 100%;
+        position: absolute;
+        color: $primaryColour;
+        @include fontSize(25);
+        margin: 0;
+      }
     }
   }
-}
-
-#generate {
-  display: none;
-  margin-top: 25px;
-  padding: 15px;
-}
-
-.displayOutfit p {
+  #generate {
+    display: none;
+    margin-top: 25px;
+    padding: 15px;
+  }
+  .displayOutfit p {
     @include fontSize(18);
     display: none;
     width: 100%;
     text-align: right;
     margin: 0;
-}
-//general displayWeather & displayOutfit styling ends here
-
-//media queries begin here
- @include tabletSmall {
-   .displayOutfits {
-     flex-direction: row;
-     
-    //  img {
-    //    padding: 0 3%;
-    //  }
-  }
-
-   .weatherDetails {
-    @include fontSize(32)
-  }
-} //tabletSmall media query ends here
-
-@include tabletLarge {
- 
-  .displayOutfits {
-    img {
-      height: 400px;
+  } //general displayWeather & displayOutfit styling ends here
+  //media queries begin here
+  @include tabletSmall {
+    .displayOutfits {
+      flex-direction: row; //  img {
+      //    padding: 0 3%;
+      //  }
     }
-  }
-} //tabletLarge media query ends here
-
-@include desktopSmall {
-  a {
-    img {
-      height: 500px;
+    .weatherDetails {
+      @include fontSize(32);
+    }
+  } //tabletSmall media query ends here
+  @include tabletLarge {
+    .displayOutfits {
+      img {
+        height: 400px;
+      }
+    }
+  } //tabletLarge media query ends here
+  @include desktopSmall {
+    a {
+      img {
+        height: 500px;
+      }
     }
   }
 }

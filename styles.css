@@ -317,7 +317,6 @@ form [type="text"] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
@@ -340,45 +339,61 @@ form [type="text"] {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center; }
-  .displayOutfits a img {
-    height: 300px;
-    padding: 25px; }
+  .displayOutfits a {
+    position: relative; }
+    .displayOutfits a .overlay {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: -webkit-gradient(linear, right top, left top, from(rgba(0, 0, 0, 0.4)), to(rgba(0, 0, 0, 0.4)));
+      background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+      background: -o-linear-gradient(right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+      background: linear-gradient(to left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%); }
+    .displayOutfits a img {
+      height: 300px; }
   .displayOutfits a:hover {
-    background-color: red; }
-    .displayOutfits a:hover img:hover {
-      -webkit-box-shadow: 5px 5px 5px 5px lightgrey;
-      box-shadow: 5px 5px 5px 5px lightgrey; }
-
-#generate {
-  display: none;
-  margin-top: 25px;
-  padding: 15px; }
-
-.displayOutfit p {
-  font-size: 18px;
-  font-size: 0.9rem;
-  display: none;
-  width: 100%;
-  text-align: right;
-  margin: 0; }
-
-@media (min-width: 600px) {
-  .displayOutfits {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row; }
-  .weatherDetails {
-    font-size: 32px;
-    font-size: 1.6rem; } }
-
-@media (min-width: 900px) {
-  .displayOutfits img {
-    height: 400px; } }
-
-@media (min-width: 1200px) {
-  a img {
-    height: 500px; } }
+    -webkit-box-shadow: 5px 5px 5px 5px lightgrey;
+    box-shadow: 5px 5px 5px 5px lightgrey; }
+    .displayOutfits a:hover .overlay {
+      display: block; }
+      .displayOutfits a:hover .overlay p {
+        text-align: center;
+        top: 50%;
+        width: 100%;
+        position: absolute;
+        color: white;
+        font-size: 25px;
+        font-size: 1.25rem;
+        margin: 0; }
+  .displayOutfits #generate {
+    display: none;
+    margin-top: 25px;
+    padding: 15px; }
+  .displayOutfits .displayOutfit p {
+    font-size: 18px;
+    font-size: 0.9rem;
+    display: none;
+    width: 100%;
+    text-align: right;
+    margin: 0; }
+  @media (min-width: 600px) {
+    .displayOutfits .displayOutfits {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+      flex-direction: row; }
+    .displayOutfits .weatherDetails {
+      font-size: 32px;
+      font-size: 1.6rem; } }
+  @media (min-width: 900px) {
+    .displayOutfits .displayOutfits img {
+      height: 400px; } }
+  @media (min-width: 1200px) {
+    .displayOutfits a img {
+      height: 500px; } }
 
 footer {
   text-align: center;

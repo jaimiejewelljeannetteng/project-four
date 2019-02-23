@@ -59,8 +59,8 @@ app.smoothScroll = function() {
 // generate button is hidden on page load, show button on submit
 app.generateButton = function() {
   setTimeout(() => {
-  $("#generate").show();
-  $(".displayOutfit p").show();
+    $("#generate").show();
+    $(".displayOutfit p").show();
   }, 5000);
   app.generateClick();
 };
@@ -185,7 +185,7 @@ app.displayEtsy = items => {
     (html, { etsyImage, etsyTitle, etsyUrl }, index) => {
       console.log(items, index);
       let image = `<img src="${etsyImage}" id="clothing-${index}-item " alt="${etsyTitle}">`;
-      let itemUrl = `<a href="${etsyUrl}" class="overlay">Hello There ${image}</a>`;
+      let itemUrl = `<a href="${etsyUrl}"><div class="overlay"><p>Click to Shop</p></div>${image}</a>`;
       return html + itemUrl;
     },
     ""
