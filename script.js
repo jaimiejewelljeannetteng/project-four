@@ -15,34 +15,45 @@ app.init = () => {
 
 //Listen for an onclick for the submit button
 app.onSubmit = () => {
-  $("#submitButton").on("click", function() {
-    app.handleSubmit();
-    app.generateButton();
+  $("#submitButton").on("click", function(e) {
+    e.preventDefault();
+
+    if ($("#city").val() !== "") {
+      app.smoothScroll();
+      app.handleSubmit();
+      app.generateButton();
+    } else {
+      app.emptyInput();
+    }
   });
 };
 
 //If there is error, sweetalert is presented. If there is no error, start retrieving API
 app.handleSubmit = () => {
-  app.handleEmptyInput();
   app.getValueOfUserInput();
   //displayWeather will show the API data according to userInput to DOM
   $(".displayWeather").val("");
 };
 
+app.smoothScroll = function() {
+  $("html, body").animate(
+    {
+      scrollTop: $(".displayWeather").offset().top
+    },
+    1000
+  );
+};
 // generate button is hidden on page load, show button on submit
 app.generateButton = function() {
-  if ($("#city").val() !== "") {
-    $("#generate").show();
-    $(".displayOutfit p").show();
-    app.generateClick();
-  }
+  $("#generate").show();
+  app.generateClick();
 };
-
 //Listen for click to refresh, and reload new clothing.
 app.generateClick = () => {
   $("#generate").on("click", function(e) {
     e.preventDefault();
     app.handleSubmit();
+    console.log("hi");
   });
 };
 
@@ -63,6 +74,7 @@ app.getWeather = location => {
     let temperature = response.current.temp_c;
     //call app.getEtsyParams and pass it the temperature from weather API
     app.getEtsyParams(temperature);
+    app.smoothScroll();
   });
 }; //app.getWeather ends here
 
@@ -80,22 +92,8 @@ app.displayWeather = function(data) {
   });
 
   $(".displayWeather").html("");
-  $(".displayWeather").html(app.currentConditions)
-  $.when()
-  
+  $(".displayWeather").html(app.currentConditions);
 }; //app.displayWeather ends here
-
-
-app.smoothScroll = function () {
-  $("#submitButton").on("click", function () {
-    $("html, body").animate(
-      {
-        scrollTop: $(".displayWeather").offset().top
-      },
-      1000
-    );
-  });
-};
 
 //error handling, if user does not input city
 app.emptyInput = function() {
@@ -109,12 +107,7 @@ app.emptyInput = function() {
   }
 }; //app.emptyInput ends here
 
-app.handleEmptyInput = function() {
-  $("#submitButton").on("click", function(e) {
-    e.preventDefault();
-    app.emptyInput();
-  });
-}; //event handler for on submit, specific to on submit  *** i think we need to rejig init and move the call app.callEtsyApiTwice outside of init, to make it global and then call it in init. is this proper name spaceing? question for helpcue ***
+//event handler for on submit, specific to on submit  *** i think we need to rejig init and move the call app.callEtsyApiTwice outside of init, to make it global and then call it in init. is this proper name spaceing? question for helpcue ***
 
 //app.getValue gets the value of the users input, sends it to app.getWeather
 app.getValueOfUserInput = function() {
@@ -134,38 +127,32 @@ app.getEtsyParams = temperature => {
     app.callEtsyApiTwice(belowZeroWear);
   }
 };
-app.imageArray = [];
 
 //receive paramater (temperature) from app.getEtsyParams to call the etsy API twice
 app.callEtsyApiTwice = param => {
   let etsyQuery = param.map(query => {
+    console.log("query: ", query);
     return app.getEtsy(query);
   });
   $.when(...etsyQuery).then((...args) => {
     let argItem = args.map((item, index) => {
+      console.log(item);
       const i = Math.floor(Math.random() * item[0].results.length);
-      app.imageArray.push(item[0].results[i].MainImage.url_fullxfull)
-      // return item[0].results[i].MainImage.url_fullxfull;
-    })
-    
-    // display images once there are two in the array
-    if(app.imageArray.length === 2){
-      app.displayEtsy(app.imageArray); 
-      app.smoothScroll();
-    }
-
-  })
+      return item[0].results[i].MainImage.url_fullxfull;
+    });
+    console.log(argItem);
+    app.displayEtsy(argItem); //
+  });
 }; //callEtsyApiTwice ends here
-
 
 app.displayEtsy = item => {
   let itemDisplay = item.map((item, index) => {
+    console.log(item);
     return `<img src="${item}" id="clothing-${index} ">`;
   });
 
   $(".displayOutfits").html("");
-  $(".displayOutfits").append(itemDisplay)
-  $("clothing-0").fadeIn("slow")
+  $(".displayOutfits").append(itemDisplay);
 };
 
 app.getEtsy = item => {
@@ -178,7 +165,7 @@ app.getEtsy = item => {
       reqUrl: app.apiUrlEtsy,
       params: {
         api_key: app.apiKeyEtsy,
-        keywords: item,
+        tags: item,
         includes: "MainImage"
       }
     }
