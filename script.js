@@ -60,7 +60,7 @@ app.smoothScroll = function() {
 app.generateButton = function() {
   setTimeout(() => {
   $("#generate").show();
-  $(".displayOutfit p").show();
+  $(".displayOutfit .disclaimer").show();
   }, 5000);
   app.generateClick();
 };
