@@ -59,8 +59,8 @@ app.smoothScroll = function() {
 // generate button is hidden on page load, show button on submit
 app.generateButton = function() {
   setTimeout(() => {
-    $("#generate").show();
-    $(".displayOutfit p").show();
+  $("#generate").show();
+  $(".displayOutfit .disclaimer").show();
   }, 5000);
   app.generateClick();
 };
