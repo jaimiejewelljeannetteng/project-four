@@ -191,7 +191,7 @@ body {
   height: 100vh;
   background: white;
   color: black;
-  font-family: sans-serif;
+  font-family: "Karla", sans-serif;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -208,7 +208,9 @@ body {
 
 .wrapper {
   max-width: 1600px;
-  margin: 0 10%; }
+  margin: 0 10%;
+  font-size: 20px;
+  font-size: 1rem; }
 
 a {
   text-decoration: none; }
@@ -229,23 +231,28 @@ input[type="submit"]:hover {
 
 header {
   border: 2px solid purple;
-  height: 10vh;
+  padding-top: 10%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: center; }
+  align-items: center;
+  font-family: "Rubik", sans-serif; }
 
 h1 {
   font-family: "Rubik", sans-serif;
-  font-size: 42px;
-  font-size: 2.1rem;
-  line-height: 67.2;
-  line-height: 3.36rem;
+  font-size: 55px;
+  font-size: 2.75rem;
+  line-height: 88;
+  line-height: 4.4rem;
   letter-spacing: 2px;
   margin: 0;
   border: 2px solid #4d829f; }
+
+@media (min-width: 480px) {
+  header {
+    padding-top: 5%; } }
 
 .formContainer {
   height: calc(100vh - 10vh);
@@ -295,7 +302,8 @@ form [type="text"] {
   letter-spacing: 2px; }
 
 .weatherDetails {
-  text-align: center; }
+  text-align: center;
+  border: 2px solid orange; }
 
 .displayWeather,
 .displayOutfit {
@@ -321,14 +329,17 @@ form [type="text"] {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
-  flex-direction: column; }
+  flex-direction: column;
+  border: 2px solid pink; }
   .displayOutfits img {
-    height: 300px; }
+    height: 300px;
+    border: 2px solid fuchsia; }
 
 #generate {
   display: none;
   margin-top: 25px;
-  padding: 15px; }
+  padding: 15px;
+  border: 2px solid green; }
 
 .displayOutfit p {
   font-size: 18px;
@@ -336,11 +347,18 @@ form [type="text"] {
   display: none;
   width: 100%;
   text-align: right;
-  margin: 0; }
+  margin: 0;
+  border: 2px solid yellow; }
+
+@media (min-width: 600px) {
+  .displayOutfits {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row; }
+    .displayOutfits img {
+      padding: 0 3%; } }
 
 footer {
-  font-size: 18px;
-  font-size: 0.9rem;
   text-align: center;
-  padding: 5px;
-  border: 2px solid tomato; }
+  padding: 5px; }

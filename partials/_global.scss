@@ -2,7 +2,7 @@ body {
     height: 100vh;
     background: $primaryColour;
     color: $secondaryColour;
-    font-family: $primaryFont;
+    font-family: $bodyFont;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -12,6 +12,7 @@ body {
 .wrapper {
     max-width: 1600px;
     margin: 0 10%;
+    @include fontSize(20)
 }
 
 a {

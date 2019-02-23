@@ -40,12 +40,13 @@ app.smoothScroll = function() {
     {
       scrollTop: $(".displayWeather").offset().top
     },
-    1000
+    4000
   );
 };
 // generate button is hidden on page load, show button on submit
 app.generateButton = function() {
   $("#generate").show();
+  $(".displayOutfit p").show();
   app.generateClick();
 };
 //Listen for click to refresh, and reload new clothing.
