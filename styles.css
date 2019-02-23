@@ -230,15 +230,13 @@ input[type="submit"]:hover {
   background-color: #377f7c; }
 
 header {
-  border: 2px solid purple;
   padding-top: 10%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: center;
-  font-family: "Rubik", sans-serif; }
+  align-items: center; }
 
 h1 {
   font-family: "Rubik", sans-serif;
@@ -247,8 +245,7 @@ h1 {
   line-height: 88;
   line-height: 4.4rem;
   letter-spacing: 2px;
-  margin: 0;
-  border: 2px solid #4d829f; }
+  margin: 0; }
 
 @media (min-width: 480px) {
   header {
@@ -256,7 +253,6 @@ h1 {
 
 .formContainer {
   height: calc(100vh - 10vh);
-  border: 2px solid yellow;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -282,9 +278,7 @@ form {
   -ms-flex-align: center;
   align-items: center;
   width: 100%;
-  padding: 10% 0;
-  border: 2px solid red;
-  color: white; }
+  padding: 10% 0; }
 
 form [type="text"],
 form [type="submit"] {
@@ -293,13 +287,21 @@ form [type="submit"] {
   font-family: "Karla", sans-serif; }
 
 form [type="text"] {
-  background: pink;
   min-width: 50%;
+  border: 2px solid #4d829f;
   background: white;
   padding-left: 15px;
-  border: 2px solid #4d829f;
+  text-transform: lowercase;
   color: black;
   letter-spacing: 2px; }
+  form [type="text"]::-webkit-input-placeholder {
+    color: black; }
+  form [type="text"]:-ms-input-placeholder {
+    color: black; }
+  form [type="text"]::-ms-input-placeholder {
+    color: black; }
+  form [type="text"]::placeholder {
+    color: black; }
 
 .weatherDetails {
   text-align: center;
@@ -330,6 +332,9 @@ form [type="text"] {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   border: 2px solid pink; }
   .displayOutfits img {
     height: 300px;
@@ -338,8 +343,7 @@ form [type="text"] {
 #generate {
   display: none;
   margin-top: 25px;
-  padding: 15px;
-  border: 2px solid green; }
+  padding: 15px; }
 
 .displayOutfit p {
   font-size: 18px;
@@ -347,8 +351,7 @@ form [type="text"] {
   display: none;
   width: 100%;
   text-align: right;
-  margin: 0;
-  border: 2px solid yellow; }
+  margin: 0; }
 
 @media (min-width: 600px) {
   .displayOutfits {
@@ -358,6 +361,10 @@ form [type="text"] {
     flex-direction: row; }
     .displayOutfits img {
       padding: 0 3%; } }
+
+@media (min-width: 900px) {
+  .displayOutfits img {
+    height: 400px; } }
 
 footer {
   text-align: center;

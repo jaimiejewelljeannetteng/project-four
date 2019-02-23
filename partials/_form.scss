@@ -1,10 +1,8 @@
 .formContainer {
     height: calc(100vh - 10vh);
-    border: 2px solid yellow;
     display: flex;
     justify-content: center;
-    align-items: center;
-    
+    align-items: center;   
 }
 
 form {
@@ -14,8 +12,6 @@ form {
     align-items: center;
     width: 100%;
     padding: 10% 0;
-    border: 2px solid red;
-    color: white;
 }
 
 form {
@@ -27,16 +23,16 @@ form {
     }
     
     [type="text"] {
-    background: pink;
     min-width: 50%;
+    border: 2px solid $primaryAccent;
     background: $primaryColour;
     padding-left: 15px;
-    border: 2px solid $primaryAccent;
+    text-transform: lowercase;
     color: $secondaryColour;
     letter-spacing:2px;
-    }
 
-    [type="submit"] {
-        // width: 15%;       
+        &::placeholder {
+            color: $secondaryColour;
+        }
     }
-}
+} 

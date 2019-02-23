@@ -1,10 +1,7 @@
 header {
-    border: 2px solid purple;
     padding-top: 10%;
     display: flex;
     align-items: center;
-    font-family: $displayFont;
-
 }
 
 h1 {
@@ -13,9 +10,9 @@ h1 {
     @include lineHeight(55);
     letter-spacing: 2px;
     margin: 0;
-    border: 2px solid $primaryAccent;
 }
 
+//media query styling begins here
 @include phoneLarge {
     header {
         padding-top: 5%;
