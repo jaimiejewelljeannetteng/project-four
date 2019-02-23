@@ -1,15 +1,20 @@
 header {
-    border: 2px solid purple;
-    height: 10vh;
+    padding-top: 10%;
     display: flex;
     align-items: center;
 }
 
 h1 {
     font-family: $displayFont;
-    @include fontSize(42);
-    @include lineHeight(42);
+    @include fontSize(55);
+    @include lineHeight(55);
     letter-spacing: 2px;
     margin: 0;
-    border: 2px solid $primaryAccent;
+}
+
+//media query styling begins here
+@include phoneLarge {
+    header {
+        padding-top: 5%;
+    }
 }

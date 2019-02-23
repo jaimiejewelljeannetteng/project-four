@@ -47,9 +47,19 @@ app.handleSubmit = () => {
   //displayWeather will show the API data according to userInput to DOM
   $(".displayWeather").val("");
 };
+
+app.smoothScroll = function() {
+  $("html, body").animate(
+    {
+      scrollTop: $(".displayWeather").offset().top
+    },
+    4000
+  );
+};
 // generate button is hidden on page load, show button on submit
 app.generateButton = function() {
   $("#generate").show();
+  $(".displayOutfit p").show();
   app.generateClick();
 };
 //Listen for click to refresh, and reload new clothing.

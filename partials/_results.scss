@@ -1,5 +1,6 @@
 .weatherDetails {
     text-align: center;
+    border: 2px solid orange;
 }
 
 .displayWeather,
@@ -14,8 +15,11 @@
 .displayOutfits {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  border: 2px solid pink;
   img {
     height: 300px;
+    border: 2px solid fuchsia;
   }
 }
 
@@ -32,3 +36,22 @@
     text-align: right;
     margin: 0;
 }
+//general displayWeather & displayOutfit styling ends here
+
+//media queries begin here
+ @include tabletSmall {
+   .displayOutfits {
+     flex-direction: row;
+     img {
+       padding: 0 3%;
+     }
+  }
+} //tabletSmall media query ends here
+
+@include tabletLarge {
+  .displayOutfits {
+    img {
+      height: 400px;
+    }
+  }
+} //tabletLarge media query ends here
