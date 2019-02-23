@@ -19,8 +19,7 @@ a {
     text-decoration: none;
 }
 
-a,
-input[type="submit"] {
+.button {
     background: $primaryAccent;
     color: $primaryColour;
     text-transform: uppercase;
@@ -28,7 +27,6 @@ input[type="submit"] {
     border-radius: 15px;
 }
 
-a:hover, 
-input[type="submit"]:hover { 
+.button:hover { 
     background-color: $secondaryAccent;
 }

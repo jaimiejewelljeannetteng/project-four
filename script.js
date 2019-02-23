@@ -123,15 +123,11 @@ app.emptyInput = function() {
   }
 }; //app.emptyInput ends here
 
-<<<<<<< HEAD
 //app.getValue gets the value of the users input, sends it to app.getWeather
 app.getValueOfUserInput = function() {
   app.location = $("#city").val();
   app.getWeather(app.location);
 };
-=======
-//event handler for on submit, specific to on submit  *** i think we need to rejig init and move the call app.callEtsyApiTwice outside of init, to make it global and then call it in init. is this proper name spaceing? question for helpcue ***
->>>>>>> 742c952115a86d7c6aa25c79f209a838d92f784b
 
 //once receive temperature, it will compare it with 0
 //if above 0'C, return Etsy A (Tshirt,Short Pants)
@@ -189,7 +185,7 @@ app.displayEtsy = items => {
     (html, { etsyImage, etsyTitle, etsyUrl }, index) => {
       console.log(items, index);
       let image = `<img src="${etsyImage}" id="clothing-${index}-item " alt="${etsyTitle}">`;
-      let itemUrl = `<a href="${etsyUrl}">${image}</a>`;
+      let itemUrl = `<a href="${etsyUrl}" class="overlay">Hello There ${image}</a>`;
       return html + itemUrl;
     },
     ""
