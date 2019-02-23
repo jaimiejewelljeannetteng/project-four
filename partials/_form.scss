@@ -7,8 +7,6 @@
     
 }
 
-
-
 form {
     display: flex;
     flex-direction: column;
@@ -30,7 +28,7 @@ form {
     
     [type="text"] {
     background: pink;
-    width: 50%;
+    min-width: 50%;
     background: $primaryColour;
     padding-left: 15px;
     border: 2px solid $primaryAccent;

@@ -1,10 +1,5 @@
-// <section class="displayWeather"></section>
-//       <section class="displayOutfit">
-//         <div class="displayTop"></div>
-//         <div class="displayBottom"></div>
-//         <a href="" id="generate">Generate</a>
-a {
-//   padding: 25px;
+.weatherDetails {
+    text-align: center;
 }
 
 .displayWeather,
@@ -24,11 +19,16 @@ a {
   }
 }
 
-//  <section class="displayOutfit">
-//         <div class="displayTop"></div>
-//         <div class="displayBottom"></div>
-//         <a href="" id="generate">Generate</a>
-//       </section>
 #generate {
   display: none;
+  margin-top: 25px;
+  padding: 15px;
+}
+
+.displayOutfit p {
+    @include fontSize(18);
+    display: none;
+    width: 100%;
+    text-align: right;
+    margin: 0;
 }

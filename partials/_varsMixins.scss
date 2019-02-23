@@ -1,15 +1,11 @@
 $primaryFont: sans-serif;
 $primaryColour:white;
-// #f6f5f4;
 $secondaryColour: black;
 $primaryAccent: #4d829f;
 $secondaryAccent: #377f7c;
 $displayFont: 'Rubik', sans-serif;
 $bodyFont: 'Karla', sans-serif;
 $transitionDetail: .4s ease-in-out;
-
-
-
 
 @mixin fontSize($sizeValue){
   font-size: $sizeValue * 1px;

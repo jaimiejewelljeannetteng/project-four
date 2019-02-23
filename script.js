@@ -33,6 +33,7 @@ app.handleSubmit = () => {
 app.generateButton = function() {
   if ($("#city").val() !== "") {
     $("#generate").show();
+    $(".displayOutfit p").show();
     app.generateClick();
   }
 };
