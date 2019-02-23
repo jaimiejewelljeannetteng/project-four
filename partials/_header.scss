@@ -8,7 +8,9 @@ header {
 h1 {
     font-family: $displayFont;
     @include fontSize(42);
+    @include lineHeight(42);
+    letter-spacing: 2px;
     margin: 0;
-    border: 2px solid turquoise;
+    border: 2px solid $primaryAccent;
     
 }

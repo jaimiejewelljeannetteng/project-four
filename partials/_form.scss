@@ -7,6 +7,8 @@
     
 }
 
+
+
 form {
     display: flex;
     flex-direction: column;
@@ -15,7 +17,7 @@ form {
     width: 100%;
     padding: 10% 0;
     border: 2px solid red;
-    color: $primaryFontColour;
+    color: white;
 }
 
 form {
@@ -27,20 +29,18 @@ form {
     }
     
     [type="text"] {
-    border: 2px solid blue;
+    background: pink;
     width: 50%;
-    background: $primaryBgColour;
+    background: $primaryColour;
     padding-left: 15px;
-    border: 2px solid $primaryFontColour;
-    color: $primaryFontColour;
+    border: 2px solid $primaryAccent;
+    color: $secondaryColour;
     letter-spacing:2px;
-    
-
     }
 
     [type="submit"] {
-        border: 2px solid pink;
-        // width: 200px;
-        width: 15%
+        // width: 15%;
+
+       
     }
 }

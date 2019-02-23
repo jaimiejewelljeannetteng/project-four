@@ -1,6 +1,6 @@
 body {
-    background-image: $primaryBgColour;
-    color: $primaryFontColour;
+    background: $primaryColour;
+    color: $secondaryColour;
     font-family: $primaryFont;
     display: flex;
     flex-direction: column;
@@ -15,4 +15,19 @@ body {
 
 a {
     text-decoration: none;
+}
+
+a,
+input[type="submit"] {
+    background: $primaryAccent;
+    color: $primaryColour;
+    text-transform: uppercase;
+    transition: $transitionDetail;
+    border-radius: 15px;
+}
+
+a:hover, 
+input[type="submit"]:hover { 
+    background-color: $secondaryAccent;
+
 }
