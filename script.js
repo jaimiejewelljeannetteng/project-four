@@ -27,7 +27,6 @@ app.onSubmit = () => {
     e.preventDefault();
 
     if ($("#city").val() !== "") {
-      app.smoothScroll();
       app.handleSubmit();
       app.generateButton();
     } else {
@@ -135,29 +134,29 @@ app.getValueOfUserInput = function() {
 //if above 0'C, return Etsy A (Tshirt,Short Pants)
 //if below 0'C, return Etsy B (jacket,  Pants)
 app.getEtsyParams = temperature => {
-  let aboveZeroTopSelection = ["tshirt", "vests", "blazers", "light jackets"];
-  let aboveZeroTopRandomIndex = Math.floor(
-    Math.random() * aboveZeroTopSelection.length
+  let springTopSelection = ["tshirt", "vests", "blazers", "light jackets"];
+  let springTopRandomIndex = Math.floor(
+    Math.random() * springTopSelection.length
   );
-  let aboveZeroTopSelected = aboveZeroTopSelection[aboveZeroTopRandomIndex];
-  let aboveZeroBottomSelection = "shorts";
+  let springTopSelected = springTopSelection[springTopRandomIndex];
+  let springBottomSelected = "shorts";
 
-  let belowZeroTopSelection = ["sweater", "long sleeve"];
-  let belowZeroTopRandomIndex = Math.floor(
-    Math.random() * belowZeroTopSelection.length
+  let winterTopSelection = ["sweater", "long sleeve"];
+  let winterTopRandomIndex = Math.floor(
+    Math.random() * winterTopSelection.length
   );
-  let belowZeroTopSelected = belowZeroTopSelection[belowZeroTopRandomIndex];
-  let belowZeroBottomSelection = "pants";
+  let winterTopSelected = winterTopSelection[winterTopRandomIndex];
+  let winterBottomSelection = "pants";
 
-  let aboveZeroWear = [aboveZeroTopSelected, aboveZeroBottomSelection];
-  console.log("aboveZeroWear: ", aboveZeroWear);
-  let belowZeroWear = [belowZeroTopSelected, belowZeroBottomSelection];
-  console.log("belowZeroWear: ", belowZeroWear);
+  let springWear = [springTopSelected, springBottomSelected];
+  console.log("springWear: ", springWear);
+  let winterWear = [winterTopSelected, winterBottomSelection];
+  console.log("winterWear: ", winterWear);
 
-  if (temperature > 0) {
-    app.callEtsyApiTwice(aboveZeroWear);
+  if (temperature > 10) {
+    app.callEtsyApiTwice(springWear);
   } else {
-    app.callEtsyApiTwice(belowZeroWear);
+    app.callEtsyApiTwice(winterWear);
   }
 };
 

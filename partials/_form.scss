@@ -25,6 +25,7 @@ form {
     [type="text"] {
     min-width: 50%;
     border: 2px solid $primaryAccent;
+    border-radius: 10px;
     background: $primaryColour;
     padding-left: 15px;
     text-transform: lowercase;

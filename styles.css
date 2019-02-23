@@ -222,13 +222,13 @@ a {
   -webkit-transition: 0.4s ease-in-out;
   -o-transition: 0.4s ease-in-out;
   transition: 0.4s ease-in-out;
-  border-radius: 15px; }
+  border-radius: 10px; }
 
 .button:hover {
   background-color: #377f7c; }
 
 header {
-  padding: 15% 0;
+  padding-top: 15%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -295,6 +295,7 @@ form [type="submit"] {
 form [type="text"] {
   min-width: 50%;
   border: 2px solid #4d829f;
+  border-radius: 10px;
   background: white;
   padding-left: 15px;
   text-transform: lowercase;

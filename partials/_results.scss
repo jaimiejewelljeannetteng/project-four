@@ -39,8 +39,8 @@
   }
 }
     
-  a:hover {
-    box-shadow: 5px 5px 5px 5px lightgrey;
+a:hover {
+  box-shadow: 5px 5px 5px 5px lightgrey;
   .overlay {
     display: block;
     p {
@@ -56,42 +56,42 @@
   }
 }
 
-  #generate {
-    display: none;
-    margin: 25px 0;
-    padding: 25px;
+#generate {
+  display: none;
+  margin: 25px 0;
+  padding: 25px;
+}
+.displayOutfit p {
+  @include fontSize(18);
+  display: none;
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+} //general displayWeather & displayOutfit styling ends here
+//media queries begin here
+@include tabletSmall {
+  .displayOutfits {
+    flex-direction: row; //  img {
+    //    padding: 0 3%;
+    //  }
   }
-  .displayOutfit p {
-    @include fontSize(18);
-    display: none;
-    width: 100%;
-    text-align: center;
-    margin: 10px 0;
-  } //general displayWeather & displayOutfit styling ends here
-  //media queries begin here
-  @include tabletSmall {
-    .displayOutfits {
-      flex-direction: row; //  img {
-      //    padding: 0 3%;
-      //  }
-    }
-    .weatherDetails {
-      @include fontSize(32);
-    }
-  } //tabletSmall media query ends here
+  .weatherDetails {
+    @include fontSize(32);
+  }
+} //tabletSmall media query ends here
 
-  @include tabletLarge {
-    .displayOutfits a {
-      img {
-        height: 400px;
-      }
+@include tabletLarge {
+  .displayOutfits a {
+    img {
+      height: 400px;
     }
-  } //tabletLarge media query ends here
-  
-  @include desktopSmall {
-    .displayOutfits a {
-      img {
-        height: 500px;
-      }
+  }
+} //tabletLarge media query ends here
+
+@include desktopSmall {
+  .displayOutfits a {
+    img {
+      height: 500px;
     }
-  } //desktopSmall ends here
+  }
+} //desktopSmall ends here
