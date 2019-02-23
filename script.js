@@ -171,14 +171,6 @@ app.callEtsyApiTwice = param => {
     });
     console.log(argItem);
     app.displayEtsy(argItem);
-    // let selectArgItem = argItem.forEach((item, index) => {
-    //   let etsyImage = item[0];
-    //   let etsyTitle = item[1];
-    //   let etsyUrl = item[2];
-    //   app.displayEtsy(etsyImage);
-    //   console.log(item[1]);
-    //   console.log(item[2]);
-    // });
   });
 }; //callEtsyApiTwice ends here
 
