@@ -61,19 +61,20 @@ a:hover {
   margin: 25px 0;
   padding: 25px;
 }
+
 .displayOutfit p {
   @include fontSize(18);
   display: none;
   width: 100%;
   text-align: center;
   margin: 10px 0;
-} //general displayWeather & displayOutfit styling ends here
+} 
+//general displayWeather & displayOutfit styling ends here
+
 //media queries begin here
 @include tabletSmall {
   .displayOutfits {
-    flex-direction: row; //  img {
-    //    padding: 0 3%;
-    //  }
+    flex-direction: row;
   }
   .weatherDetails {
     @include fontSize(32);
