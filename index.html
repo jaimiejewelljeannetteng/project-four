@@ -39,15 +39,22 @@
     <title>Project Four</title>
   </head>
   <body>
-    <header  class="wrapper">
+    <header class="wrapper">
       <h1>Fashion Forecast</h1>
     </header>
     <main class="wrapper">
       <form action="#" method="GET" id="userInput">
         <label for="city" class="visuallyHidden">Enter your city</label>
-        <input type="text" placeholder="enter city" id="city" />
-        <label for="submitButton" class="visuallyHidden">Submit your city</label>
-        <input type="submit" class="button" id="submitButton" />
+        <input
+          type="text"
+          placeholder="enter city"
+          id="city"
+          aria-label="enter city"
+        />
+        <label for="submitButton" class="visuallyHidden"
+          >Submit your city</label
+        >
+        <input type="submit" class="button" id="submitButton" value="submit" />
       </form>
       <section class="displayWeather"></section>
       <section class="displayOutfit">
@@ -57,7 +64,7 @@
       </section>
     </main>
     <footer>
-      <h3>Powered by Etsy &copy 2019 Jeannette Ng & Jaimie Jewell </h3>
+      <h3>Powered by Etsy &copy 2019 Jeannette Ng & Jaimie Jewell</h3>
     </footer>
     <script
       src="https://code.jquery.com/jquery-3.2.1.min.js"
