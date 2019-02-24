@@ -14,12 +14,14 @@ app.init = () => {
 };
 
 app.smoothScroll = function() {
-  $("html, body").animate(
-    {
-      scrollTop: $(".displayWeather").offset().top
-    },
-    1000
-  );
+  $("html, body")
+    .delay(3000)
+    .animate(
+      {
+        scrollTop: $(".displayWeather").offset().top
+      },
+      1000
+    );
 };
 //Listen for an onclick for the submit button
 app.onSubmit = () => {
@@ -139,6 +141,7 @@ app.getEtsyParams = temperature => {
   let winterBottomSelection = "pants";
 
   let springWear = [springTopSelected, springBottomSelected];
+
   let winterWear = [winterTopSelected, winterBottomSelection];
 
   if (temperature > 10) {
@@ -177,7 +180,11 @@ app.displayEtsy = items => {
     ""
   );
   $(".displayOutfits").html("");
-  $(".displayOutfits").append(itemDisplay);
+  $(".displayOutfits")
+    .append(itemDisplay)
+    .hide()
+    .delay(1000)
+    .fadeIn();
 };
 
 app.getEtsy = item => {
