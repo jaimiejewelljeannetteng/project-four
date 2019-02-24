@@ -13,7 +13,7 @@ app.init = () => {
   app.onSubmit();
 };
 
-app.smoothScroll = function() {
+app.smoothScroll = () => {
   $("html, body")
     .delay(3000)
     .animate(
@@ -27,7 +27,7 @@ app.smoothScroll = function() {
 app.onSubmit = () => {
   $("#submitButton").on("click", function(e) {
     e.preventDefault();
-//Error handling: call app.emptyInput (sweet alert) if user input is blank, otherwise call user input, show generate button & disclaimer
+    //Error handling: call app.emptyInput (sweet alert) if user input is blank, otherwise call user input, show generate button & disclaimer
     if ($("#city").val() !== "") {
       app.handleSubmit();
       app.generateButton();
@@ -37,7 +37,7 @@ app.onSubmit = () => {
   });
 };
 //app.getValueOfUserInput gets the value of the users input, sends it to app.getWeather
-app.getValueOfUserInput = function() {
+app.getValueOfUserInput = () => {
   app.location = $("#city").val();
   app.getWeather(app.location);
 };
@@ -48,7 +48,7 @@ app.handleSubmit = () => {
   $(".displayWeather").val("");
 };
 // generate button is hidden on page load, show button on submit
-app.generateButton = function() {
+app.generateButton = () => {
   setTimeout(() => {
     $("#generate").show();
     $(".disclaimer").show();
@@ -84,7 +84,7 @@ app.getWeather = location => {
 }; //app.getWeather ends here
 
 app.weatherArray = [];
-app.displayWeather = function(data) {
+app.displayWeather = data => {
   app.weatherArray.pop(); //remove content from weatherArray on each call to API (on additional submit)
   app.weatherArray.push(data);
   app.currentConditions = app.weatherArray.map(function(current) {
@@ -92,7 +92,9 @@ app.displayWeather = function(data) {
     let CurrentConditionText = getCurrentConditionText.toLowerCase();
     return `
             <div class="weatherDetails" >
-                <h2 class="weatherSentence">In <span>${current.location.name}</span>, the weather is ${CurrentConditionText} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius. Checkout your outfit below:</h2>
+                <h2 class="weatherSentence">In <span>${
+                  current.location.name
+                }</span>, the weather is ${CurrentConditionText} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius. Checkout your outfit below:</h2>
             </div>`;
   }); //app.currentConditions ends here
 
@@ -101,7 +103,7 @@ app.displayWeather = function(data) {
 }; //app.displayWeather ends here
 
 //error handling, if user does not input city
-app.emptyInput = function() {
+app.emptyInput = () => {
   if ($("#city").val() === "") {
     Swal.fire({
       title: "Error!",
@@ -113,7 +115,7 @@ app.emptyInput = function() {
 }; //app.emptyInput ends here
 
 //app.getValue gets the value of the users input, sends it to app.getWeather
-app.getValueOfUserInput = function() {
+app.getValueOfUserInput = () => {
   app.location = $("#city").val();
   app.getWeather(app.location);
 };
@@ -139,7 +141,7 @@ app.getEtsyParams = temperature => {
   let springWear = [springTopSelected, springBottomSelected];
 
   let winterWear = [winterTopSelected, winterBottomSelection];
- 
+
   if (temperature > 10) {
     app.callEtsyApiTwice(springWear);
   } else {
