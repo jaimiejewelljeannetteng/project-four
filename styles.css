@@ -257,18 +257,6 @@ h1 {
     font-size: 3rem;
     text-align: left; } }
 
-.formContainer {
-  height: calc(100vh - 10vh);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center; }
-
 form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -285,33 +273,30 @@ form {
   align-items: center;
   width: 100%;
   padding: 10% 0; }
-
-form [type="text"],
-form [type="submit"] {
-  height: 50px;
-  margin: 2% 0;
-  font-family: "Karla", sans-serif; }
-
-form [type="text"] {
-  min-width: 50%;
-  border: 2px solid #4d829f;
-  border-radius: 10px;
-  background: white;
-  padding-left: 15px;
-  text-transform: lowercase;
-  color: black;
-  letter-spacing: 2px; }
-  form [type="text"]::-webkit-input-placeholder {
-    color: black; }
-  form [type="text"]:-ms-input-placeholder {
-    color: black; }
-  form [type="text"]::-ms-input-placeholder {
-    color: black; }
-  form [type="text"]::placeholder {
-    color: black; }
-
-form [type="submit"] {
-  border: none; }
+  form [type="text"],
+  form [type="submit"] {
+    height: 50px;
+    margin: 2% 0;
+    font-family: "Karla", sans-serif; }
+  form [type="text"] {
+    min-width: 50%;
+    border: 2px solid #4d829f;
+    border-radius: 10px;
+    background: white;
+    padding-left: 15px;
+    text-transform: lowercase;
+    color: black;
+    letter-spacing: 2px; }
+    form [type="text"]::-webkit-input-placeholder {
+      color: black; }
+    form [type="text"]:-ms-input-placeholder {
+      color: black; }
+    form [type="text"]::-ms-input-placeholder {
+      color: black; }
+    form [type="text"]::placeholder {
+      color: black; }
+  form [type="submit"] {
+    border: none; }
 
 .weatherDetails {
   text-align: left; }
