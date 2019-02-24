@@ -27,7 +27,7 @@ app.smoothScroll = function() {
 app.onSubmit = () => {
   $("#submitButton").on("click", function(e) {
     e.preventDefault();
-
+//Error handling: call app.emptyInput (sweet alert) if user input is blank, otherwise call user input, show generate button & disclaimer
     if ($("#city").val() !== "") {
       app.handleSubmit();
       app.generateButton();
@@ -36,13 +36,12 @@ app.onSubmit = () => {
     }
   });
 };
-//app.getValue gets the value of the users input, sends it to app.getWeather
+//app.getValueOfUserInput gets the value of the users input, sends it to app.getWeather
 app.getValueOfUserInput = function() {
   app.location = $("#city").val();
   app.getWeather(app.location);
 };
 
-//If there is error, sweetalert is presented. If there is no error, start retrieving API
 app.handleSubmit = () => {
   app.getValueOfUserInput();
   //displayWeather will show the API data according to userInput to DOM
@@ -63,7 +62,6 @@ app.generateClick = () => {
     app.handleSubmit();
   });
 };
-
 //obtaining data from weather API
 app.getWeather = location => {
   $.ajax({
@@ -94,11 +92,9 @@ app.displayWeather = function(data) {
     let CurrentConditionText = getCurrentConditionText.toLowerCase();
     return `
             <div class="weatherDetails" >
-                <h2 class="weatherSentence">In <span> ${
-                  current.location.name
-                }</span>, the weather is ${CurrentConditionText} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius. Checkout your outfit below:</h2>
+                <h2 class="weatherSentence">In <span>${current.location.name}</span>, the weather is ${CurrentConditionText} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius. Checkout your outfit below:</h2>
             </div>`;
-  });
+  }); //app.currentConditions ends here
 
   $(".displayWeather").html("");
   $(".displayWeather").html(app.currentConditions);
@@ -123,8 +119,8 @@ app.getValueOfUserInput = function() {
 };
 
 //once receive temperature, it will compare it with 0
-//if above 0'C, return Etsy A (Tshirt,Short Pants)
-//if below 0'C, return Etsy B (jacket,  Pants)
+//if above 10'C, return Etsy A (tshirt", "vests", "blazers", "light jackets", "shorts")
+//if below 0'C, return Etsy B ("sweater", "long sleeve" "pants")
 app.getEtsyParams = temperature => {
   let springTopSelection = ["tshirt", "vest", "jackets"];
   let springTopRandomIndex = Math.floor(
@@ -143,13 +139,13 @@ app.getEtsyParams = temperature => {
   let springWear = [springTopSelected, springBottomSelected];
 
   let winterWear = [winterTopSelected, winterBottomSelection];
-
+ 
   if (temperature > 10) {
     app.callEtsyApiTwice(springWear);
   } else {
     app.callEtsyApiTwice(winterWear);
   }
-};
+}; //app.getEtsyParams ends here
 
 //receive paramater (temperature) from app.getEtsyParams to call the etsy API twice
 app.callEtsyApiTwice = param => {
