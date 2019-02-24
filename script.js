@@ -1,6 +1,6 @@
 const app = {};
 app.apiKeyWeather = "eb2e53151d8945bfb54235020192402";
-app.apiUrlWeather = "http://api.apixu.com/v1/current.json";
+app.apiUrlWeather = "https://api.apixu.com/v1/current.json";
 app.apiKeyEtsy = "xjgnf5lk3m3ruxemnnsz5knp";
 app.apiUrlEtsy = "https://openapi.etsy.com/v2/shops/polomocha/listings/active";
 
