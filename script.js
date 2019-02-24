@@ -3,7 +3,6 @@ app.apiKeyWeather = "8f6dab90acf14f9da11221736191902";
 app.apiUrlWeather = "http://api.apixu.com/v1/current.json";
 app.apiKeyEtsy = "xjgnf5lk3m3ruxemnnsz5knp";
 app.apiUrlEtsy = "https://openapi.etsy.com/v2/shops/polomocha/listings/active";
-app.userInput = ""; //empty var for user to enter city
 
 $(function() {
   app.init();
