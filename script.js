@@ -89,7 +89,7 @@ app.displayWeather = data => {
   app.weatherArray.push(data);
   app.currentConditions = app.weatherArray.map(function(current) {
     let getCurrentConditionText = current.current.condition.text;
-    let CurrentConditionText = getCurrentConditionText.toLowerCase();
+    let currentConditionText = getCurrentConditionText.toLowerCase();
     return `
             <div class="weatherDetails" >
                 <h2 class="weatherSentence">In <span>${
