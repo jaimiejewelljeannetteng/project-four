@@ -121,8 +121,8 @@ app.getValueOfUserInput = () => {
 };
 
 //once receive temperature, it will compare it with 0
-//if above 10'C, return Etsy A (tshirt", "vests", "blazers", "light jackets", "shorts")
-//if below 0'C, return Etsy B ("sweater", "long sleeve" "pants")
+//if above 10'C, return Etsy A (tshirt", "vest", jackets", "shorts")
+//if below 0'C, return Etsy B ("sweater", "blouse", "pants")
 app.getEtsyParams = temperature => {
   let springTopSelection = ["tshirt", "vest", "jackets"];
   let springTopRandomIndex = Math.floor(
@@ -185,8 +185,8 @@ app.displayEtsy = items => {
     .fadeIn();
 };
 
+//call to etsy using proxy server
 app.getEtsy = item => {
-  //proxy
   return $.ajax({
     url: "https://proxy.hackeryou.com",
     method: "GET",
