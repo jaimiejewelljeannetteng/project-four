@@ -94,7 +94,7 @@ app.displayWeather = data => {
             <div class="weatherDetails" >
                 <h2 class="weatherSentence">In <span>${
                   current.location.name
-                }</span>, the weather is ${CurrentConditionText} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius. Checkout your outfit below:</h2>
+                }</span>, the weather is ${currentConditionText} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius. Checkout your outfit below:</h2>
             </div>`;
   }); //app.currentConditions ends here
 
