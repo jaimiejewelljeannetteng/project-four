@@ -24,7 +24,14 @@ form {
       color: $secondaryColour;
     }
   }
+  [type="text"]:focus {
+    background: $primaryAccent;
+    color: $primaryColour;
+  }
   [type="submit"] {
     border: none;
+  }
+  [type="submit"]:focus {
+    background: $secondaryAccent;
   }
 }

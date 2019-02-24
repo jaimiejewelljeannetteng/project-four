@@ -295,8 +295,13 @@ form {
       color: black; }
     form [type="text"]::placeholder {
       color: black; }
+  form [type="text"]:focus {
+    background: #4d829f;
+    color: white; }
   form [type="submit"] {
     border: none; }
+  form [type="submit"]:focus {
+    background: #377f7c; }
 
 .weatherDetails {
   text-align: left; }
@@ -348,12 +353,15 @@ form {
       height: 300px;
       min-width: 100%; }
 
-a:hover {
+a:hover,
+a:focus {
   -webkit-box-shadow: 5px 5px 5px 5px lightgrey;
   box-shadow: 5px 5px 5px 5px lightgrey; }
-  a:hover .overlay {
+  a:hover .overlay,
+  a:focus .overlay {
     display: block; }
-    a:hover .overlay p {
+    a:hover .overlay p,
+    a:focus .overlay p {
       display: block;
       text-align: center;
       top: 50%;
@@ -368,6 +376,9 @@ a:hover {
   display: none;
   margin: 25px 0;
   padding: 25px; }
+
+#generate:focus {
+  background: #377f7c; }
 
 .displayOutfit p {
   font-size: 18px;
