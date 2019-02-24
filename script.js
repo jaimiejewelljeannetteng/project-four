@@ -120,9 +120,9 @@ app.getValueOfUserInput = () => {
   app.getWeather(app.location);
 };
 
-//once receive temperature, it will compare it with 0
+//once receive temperature, it will compare it with 10
 //if above 10'C, return Etsy A (tshirt", "vest", jackets", "shorts")
-//if below 0'C, return Etsy B ("sweater", "blouse", "pants")
+//if below 10'C, return Etsy B ("sweater", "blouse", "pants")
 app.getEtsyParams = temperature => {
   let springTopSelection = ["tshirt", "vest", "jackets"];
   let springTopRandomIndex = Math.floor(
