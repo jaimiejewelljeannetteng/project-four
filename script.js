@@ -46,20 +46,11 @@ app.handleSubmit = () => {
   //displayWeather will show the API data according to userInput to DOM
   $(".displayWeather").val("");
 };
-
-app.smoothScroll = function() {
-  $("html, body").animate(
-    {
-      scrollTop: $(".displayWeather").offset().top
-    },
-    4000
-  );
-};
 // generate button is hidden on page load, show button on submit
 app.generateButton = function() {
   setTimeout(() => {
-  $("#generate").show();
-  $(".disclaimer").show();
+    $("#generate").show();
+    $(".disclaimer").show();
   }, 3000);
   app.generateClick();
 };
@@ -68,7 +59,6 @@ app.generateClick = () => {
   $("#generate").on("click", function(e) {
     e.preventDefault();
     app.handleSubmit();
-    console.log("hi");
   });
 };
 
@@ -98,13 +88,13 @@ app.displayWeather = function(data) {
   app.weatherArray.pop(); //remove content from weatherArray on each call to API (on additional submit)
   app.weatherArray.push(data);
   app.currentConditions = app.weatherArray.map(function(current) {
-    let getCurrentConditionText = current.current.condition.text
-    let CurrentConditionText = getCurrentConditionText.toLowerCase()
+    let getCurrentConditionText = current.current.condition.text;
+    let CurrentConditionText = getCurrentConditionText.toLowerCase();
     return `
             <div class="weatherDetails" >
                 <h2 class="weatherSentence">In <span> ${
                   current.location.name
-      }</span>, the weather is ${CurrentConditionText} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius. Checkout your outfit below:</h2>
+                }</span>, the weather is ${CurrentConditionText} with current temperature of ${current.current.temp_c}, but it feels like ${current.current.feelslike_c} degrees celcius. Checkout your outfit below:</h2>
             </div>`;
   });
 
@@ -134,14 +124,14 @@ app.getValueOfUserInput = function() {
 //if above 0'C, return Etsy A (Tshirt,Short Pants)
 //if below 0'C, return Etsy B (jacket,  Pants)
 app.getEtsyParams = temperature => {
-  let springTopSelection = ["tshirt", "vests", "blazers", "light jackets"];
+  let springTopSelection = ["tshirt", "vest", "jackets"];
   let springTopRandomIndex = Math.floor(
     Math.random() * springTopSelection.length
   );
   let springTopSelected = springTopSelection[springTopRandomIndex];
   let springBottomSelected = "shorts";
 
-  let winterTopSelection = ["sweater", "long sleeve"];
+  let winterTopSelection = ["sweater", "blouse"];
   let winterTopRandomIndex = Math.floor(
     Math.random() * winterTopSelection.length
   );
@@ -149,9 +139,7 @@ app.getEtsyParams = temperature => {
   let winterBottomSelection = "pants";
 
   let springWear = [springTopSelected, springBottomSelected];
-  console.log("springWear: ", springWear);
   let winterWear = [winterTopSelected, winterBottomSelection];
-  console.log("winterWear: ", winterWear);
 
   if (temperature > 10) {
     app.callEtsyApiTwice(springWear);
@@ -163,12 +151,10 @@ app.getEtsyParams = temperature => {
 //receive paramater (temperature) from app.getEtsyParams to call the etsy API twice
 app.callEtsyApiTwice = param => {
   let etsyQuery = param.map(query => {
-    console.log("query: ", query);
     return app.getEtsy(query);
   });
   $.when(...etsyQuery).then((...args) => {
     let argItem = args.map((item, index) => {
-      console.log(item);
       const i = Math.floor(Math.random() * item[0].results.length);
       let etsyImage = item[0].results[i].MainImage.url_fullxfull;
       let etsyTitle = item[0].results[i].title;
@@ -176,7 +162,7 @@ app.callEtsyApiTwice = param => {
       let getEtsyInfo = { etsyImage, etsyTitle, etsyUrl };
       return getEtsyInfo;
     });
-    console.log(argItem);
+
     app.displayEtsy(argItem);
   });
 }; //callEtsyApiTwice ends here
@@ -184,7 +170,6 @@ app.callEtsyApiTwice = param => {
 app.displayEtsy = items => {
   let itemDisplay = items.reduce(
     (html, { etsyImage, etsyTitle, etsyUrl }, index) => {
-      console.log(items, index);
       let image = `<img src="${etsyImage}" id="clothing-${index}-item " alt="${etsyTitle}">`;
       let itemUrl = `<a href="${etsyUrl}"><div class="overlay"><p>Click to Shop</p></div>${image}</a>`;
       return html + itemUrl;
@@ -192,10 +177,7 @@ app.displayEtsy = items => {
     ""
   );
   $(".displayOutfits").html("");
-  $(".displayOutfits").append(itemDisplay)
-    .delay(1000)
-    .hide()
-    .fadeIn();
+  $(".displayOutfits").append(itemDisplay);
 };
 
 app.getEtsy = item => {
