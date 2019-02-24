@@ -24,7 +24,7 @@ h1 {
 
 @include tabletSmall {
     h1 {
-        @include fontSize(60)
+        @include fontSize(60);
         text-align:left;
     }
 }
