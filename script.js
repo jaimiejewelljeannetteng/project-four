@@ -72,8 +72,8 @@ app.getWeather = location => {
       key: app.apiKeyWeather,
       q: location
     }
-  }).then(
-    function(response) {
+  })
+    .done(function(response) {
       //once data is received, display weather to DOM
       app.displayWeather(response);
       // get temperature from response
@@ -81,11 +81,10 @@ app.getWeather = location => {
       //call app.getEtsyParams and pass it the temperature from weather API
       app.getEtsyParams(temperature);
       app.smoothScroll();
-    },
-    function(err) {
+    })
+    .fail(function(err) {
       app.incorrectInput();
-    }
-  );
+    });
 }; //app.getWeather ends here
 
 app.weatherArray = [];
@@ -170,6 +169,7 @@ app.callEtsyApiTwice = param => {
     return app.getEtsy(query);
   });
   $.when(...etsyQuery).then((...args) => {
+    console.log(args);
     let argItem = args.map((item, index) => {
       const i = Math.floor(Math.random() * item[0].results.length);
       let etsyImage = item[0].results[i].MainImage.url_fullxfull;
