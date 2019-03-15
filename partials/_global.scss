@@ -1,32 +1,40 @@
 body {
-    height: 100vh;
-    background: $primaryColour;
-    color: $secondaryColour;
-    font-family: $bodyFont;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: space-between;
+  height: 100vh;
+  background: $primaryColour;
+  color: $secondaryColour;
+  font-family: $bodyFont;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: space-between;
 }
 
 .wrapper {
-    max-width: 1600px;
-    margin: 0 10%;
-    @include fontSize(20);
+  max-width: 1600px;
+  margin: 0 10%;
+  @include fontSize(20);
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .button {
-    background: $primaryAccent;
-    color: $primaryColour;
-    text-transform: uppercase;
-    transition: $transitionDetail;
-    border-radius: 10px;
+  background: $primaryAccent;
+  color: $primaryColour;
+  text-transform: uppercase;
+  transition: $transitionDetail;
+  border-radius: 10px;
 }
 
-.button:hover { 
-    background-color: $secondaryAccent;
+.button:hover {
+  background-color: $secondaryAccent;
+}
+
+.hide {
+  opacity: 0;
+}
+
+.show {
+  opacity: 100;
 }

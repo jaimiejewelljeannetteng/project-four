@@ -1,42 +1,42 @@
-$primaryColour:white;
+$primaryColour: white;
 $secondaryColour: black;
 $primaryAccent: #4d829f;
 $secondaryAccent: #377f7c;
-$displayFont: 'Rubik', sans-serif;
-$bodyFont: 'Karla', sans-serif;
-$transitionDetail: .4s ease-in-out;
-
-@mixin fontSize($sizeValue){
+$displayFont: "Rubik",
+sans-serif;
+$bodyFont: "Karla",
+sans-serif;
+$transitionDetail: 0.4s ease-in-out;
+@mixin fontSize($sizeValue) {
   font-size: $sizeValue * 1px;
   font-size: ($sizeValue/20) * 1rem;
 }
 
-@mixin lineHeight($heightValue){
+@mixin lineHeight($heightValue) {
   line-height: $heightValue * 1.6;
   line-height: ($heightValue/20) * 1.6rem;
 }
 
 @mixin phoneLarge {
-  @media(min-width: 480px) {@content};
+  @media (min-width: 480px) {
+    @content;
+  }
 }
 
 @mixin tabletSmall {
-  @media(min-width: 600px) {@content};
+  @media (min-width: 600px) {
+    @content;
+  }
 }
 
 @mixin tabletLarge {
-  @media(min-width: 900px) {@content};
+  @media (min-width: 900px) {
+    @content;
+  }
 }
 
 @mixin desktopSmall {
-  @media (min-width: 1200px) {@content};
+  @media (min-width: 1200px) {
+    @content;
+  }
 }
-
-
-
-
-
-
-
-
-

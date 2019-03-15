@@ -45,7 +45,26 @@ app.handleSubmit = () => {
   app.getValueOfUserInput();
   //displayWeather will show the API data according to userInput to DOM
   $(".displayWeather").val("");
+  setTimeout(function() {
+    $("#loading").toggleClass("hide");
+  }, 500);
+
+  app.loadingPage();
 };
+
+//shows the loading
+app.loadingPage = () => {
+  setTimeout(function() {
+    $("#loading").toggleClass("hide");
+  }, 2500);
+  // let loading = setInterval(function() {
+  //   console.log("hi");
+  // });
+  // setTimeout(function() {
+  //   loading;
+  // }, 3000);
+};
+
 // generate button is hidden on page load, show button on submit
 app.generateButton = () => {
   setTimeout(() => {
@@ -71,15 +90,19 @@ app.getWeather = location => {
       key: app.apiKeyWeather,
       q: location
     }
-  }).then(function(response) {
-    //once data is received, display weather to DOM
-    app.displayWeather(response);
-    // get temperature from response
-    let temperature = response.current.temp_c;
-    //call app.getEtsyParams and pass it the temperature from weather API
-    app.getEtsyParams(temperature);
-    app.smoothScroll();
-  });
+  })
+    .done(function(response) {
+      //once data is received, display weather to DOM
+      app.displayWeather(response);
+      // get temperature from response
+      let temperature = response.current.temp_c;
+      //call app.getEtsyParams and pass it the temperature from weather API
+      app.getEtsyParams(temperature);
+      app.smoothScroll();
+    })
+    .fail(function() {
+      app.invalidInput();
+    });
 }; //app.getWeather ends here
 
 app.weatherArray = [];
@@ -117,6 +140,16 @@ app.emptyInput = () => {
 app.getValueOfUserInput = () => {
   app.location = $("#city").val();
   app.getWeather(app.location);
+};
+
+//sweet Alert
+app.invalidInput = () => {
+  Swal.fire({
+    title: "Error!",
+    text: "Enter valid city",
+    type: "error",
+    confirmButtonText: "OK"
+  });
 };
 
 //once receive temperature, it will compare it with 10
@@ -171,7 +204,7 @@ app.displayEtsy = items => {
   let itemDisplay = items.reduce(
     (html, { etsyImage, etsyTitle, etsyUrl }, index) => {
       let image = `<img src="${etsyImage}" id="clothing-${index}-item " alt="${etsyTitle}">`;
-      let itemUrl = `<a href="${etsyUrl}"><div class="overlay"><p>Click to Shop</p></div>${image}</a>`;
+      let itemUrl = `<a href="${etsyUrl}" target="_blank"><div class="overlay"><p>Click to Shop</p></div>${image}</a>`;
       return html + itemUrl;
     },
     ""
