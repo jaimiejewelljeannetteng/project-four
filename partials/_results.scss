@@ -61,7 +61,7 @@ a:focus {
 #generate {
   display: none;
   margin: 25px 0;
-  padding: 25px;
+  padding: 15px 0;
 }
 
 #generate:focus {
@@ -82,7 +82,8 @@ a:focus {
   .displayOutfits {
     flex-direction: row;
   }
-  .weatherDetails {
+  .weatherDetails, 
+  h2 {
     @include fontSize(32);
   }
 } //tabletSmall media query ends here
