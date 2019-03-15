@@ -12,12 +12,12 @@ app.init = () => {
   app.onSubmit();
 };
 
-app.smoothScroll = () => {
+smoothScroll = () => {
   $("html, body")
     .delay(3000)
     .animate(
       {
-        scrollTop: $(".displayWeather").offset().top
+        scrollTop: $(".sect1").offset().top
       },
       1000
     );

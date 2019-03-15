@@ -1,10 +1,14 @@
+.wrapper form {
+  padding-top: 0;
+}
+
 form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 10% 0;
+  padding: 0 0 10% 0;
   [type="text"],
   [type="submit"] {
     height: 50px;

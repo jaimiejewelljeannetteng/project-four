@@ -1,3 +1,9 @@
+html {
+  scroll-behavior: smooth;
+  font-size: 125%;
+}
+
+
 body {
     height: 100vh;
     background: $primaryColour;
@@ -6,27 +12,46 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: space-between;
 }
 
 .wrapper {
     max-width: 1600px;
     margin: 0 10%;
+    padding-top: 25%;
     @include fontSize(20);
+}
+
+main.wrapper {
+    padding-top: 0;
 }
 
 a {
     text-decoration: none;
 }
 
+#submitButton,
+#generate {
+    width: 150px;
+    height: 50px;
+}
+
 .button {
+    text-align: center;
     background: $primaryAccent;
     color: $primaryColour;
     text-transform: uppercase;
     transition: $transitionDetail;
     border-radius: 10px;
+   
 }
 
 .button:hover { 
     background-color: $secondaryAccent;
+}
+
+@include tabletLarge {
+    .wrapper {
+        padding-top: 10%;
+    }
+
 }
