@@ -49,6 +49,31 @@ a {
     background-color: $secondaryAccent;
 }
 
+.hide {
+    opacity: 0;
+    height: 50px;
+}
+
+.show {
+   opacity: 100;
+   height: 50px;
+}
+
+.loadingImageContainer {
+    display: flex;
+    justify-content: center;
+    animation: infinite-spinning 6s infinite;
+}
+
+@keyframes infinite-spinning {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 @include tabletLarge {
     .wrapper {
         padding-top: 10%;

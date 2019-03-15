@@ -45,15 +45,27 @@ app.handleSubmit = () => {
   app.getValueOfUserInput();
   //displayWeather will show the API data according to userInput to DOM
   $(".displayWeather").val("");
+  setTimeout(function(){
+    $("#loading").toggleClass("hide");
+  }, 500);
+  app.loadingPage();
+};
+
+  //shows the loading
+app.loadingPage = () => {
+  setTimeout(function () {
+    $("#loading").toggleClass("hide");
+  }, 2500);
 };
 // generate button is hidden on page load, show button on submit
 app.generateButton = () => {
   setTimeout(() => {
     $("#generate").show();
     $(".disclaimer").show();
-  }, 3000);
+    }, 3000);
   app.generateClick();
 };
+
 //Listen for click to refresh, and reload new clothing.
 app.generateClick = () => {
   $("#generate").on("click", function(e) {
@@ -71,7 +83,7 @@ app.getWeather = location => {
       key: app.apiKeyWeather,
       q: location
     }
-  }).then(function(response) {
+  }).done(function (response) {
     //once data is received, display weather to DOM
     app.displayWeather(response);
     // get temperature from response
@@ -79,7 +91,10 @@ app.getWeather = location => {
     //call app.getEtsyParams and pass it the temperature from weather API
     app.getEtsyParams(temperature);
     app.smoothScroll();
-  });
+  })
+    .fail(function () {
+      app.invalidInput();
+    });
 }; //app.getWeather ends here
 
 app.weatherArray = [];
