@@ -1,5 +1,4 @@
 header {
-    // padding-top: 15%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,6 +12,10 @@ h1 {
     @include lineHeight(40);
     letter-spacing: 2px;
     margin: 0;
+}
+
+h2 {
+    padding: 10px 0 25px 0;
 }
 //general header styling ends here
 

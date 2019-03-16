@@ -1,9 +1,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 125%;
-
 }
-
 
 body {
     height: 100vh;
@@ -20,7 +18,7 @@ body {
 .wrapper {
     max-width: 1600px;
     margin: 0 10%;
-    padding-top: 25%;
+    padding: 10px 0 0 0;
     @include fontSize(20);
 }
 
@@ -77,9 +75,13 @@ a {
     }
 }
 
-@include tabletLarge {
+@include tabletSmall {
     .wrapper {
-        padding-top: 10%;
+        padding-top: 15%;
+    }
+
+    h2 {
+        margin: 0;
     }
 
 }
