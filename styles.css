@@ -205,7 +205,8 @@ body {
   flex-direction: column;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between; }
+  justify-content: space-between;
+  background-image: url("./assets/backgroundOpacity5.jpg"); }
 
 .wrapper {
   max-width: 1600px;
