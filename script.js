@@ -12,15 +12,31 @@ app.init = () => {
   app.onSubmit();
 };
 
-smoothScroll = () => {
-  $("html, body")
-    .delay(3000)
-    .animate(
-      {
-        scrollTop: $(".sect1").offset().top
-      },
-      1000
-    );
+app.smoothScroll1 = () => {
+  document.querySelector(".displayWeather").scrollIntoView({
+    behavior: "smooth"
+  });
+  // $("html, body")
+  //   .delay(3000)
+  //   .animate(
+  //     {
+  //       scrollTop: $(".sect1").offset().top
+  //     },
+  //     1000
+  //   );
+};
+app.smoothScroll2 = () => {
+  document.querySelector(".displayOutfit").scrollIntoView({
+    behavior: "smooth"
+  });
+  // $("html, body")
+  //   .delay(3000)
+  //   .animate(
+  //     {
+  //       scrollTop: $(".sect1").offset().top
+  //     },
+  //     1000
+  //   );
 };
 //Listen for an onclick for the submit button
 app.onSubmit = () => {
@@ -45,10 +61,9 @@ app.handleSubmit = () => {
   app.getValueOfUserInput();
   //displayWeather will show the API data according to userInput to DOM
   $(".displayWeather").val("");
-  setTimeout(function() {
-    $("#loadingSection").toggleClass("hide");
-  }, 500);
+  $("#loadingSection").toggleClass("hide");
   app.loadingPage();
+  $(".displayOutfits").hide();
 };
 
 //shows the loading
@@ -91,7 +106,7 @@ app.getWeather = location => {
       let temperature = response.current.temp_c;
       //call app.getEtsyParams and pass it the temperature from weather API
       app.getEtsyParams(temperature);
-      app.smoothScroll();
+      app.smoothScroll1();
     })
     .fail(function() {
       app.invalidInput();
@@ -178,8 +193,8 @@ app.callEtsyApiTwice = param => {
       let getEtsyInfo = { etsyImage, etsyTitle, etsyUrl };
       return getEtsyInfo;
     });
-
     app.displayEtsy(argItem);
+    app.smoothScroll2();
   });
 }; //callEtsyApiTwice ends here
 
