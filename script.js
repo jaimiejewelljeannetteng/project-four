@@ -16,27 +16,11 @@ app.smoothScroll1 = () => {
   document.querySelector(".displayWeather").scrollIntoView({
     behavior: "smooth"
   });
-  // $("html, body")
-  //   .delay(3000)
-  //   .animate(
-  //     {
-  //       scrollTop: $(".sect1").offset().top
-  //     },
-  //     1000
-  //   );
 };
 app.smoothScroll2 = () => {
   document.querySelector(".displayOutfit").scrollIntoView({
     behavior: "smooth"
   });
-  // $("html, body")
-  //   .delay(3000)
-  //   .animate(
-  //     {
-  //       scrollTop: $(".sect1").offset().top
-  //     },
-  //     1000
-  //   );
 };
 //Listen for an onclick for the submit button
 app.onSubmit = () => {
@@ -202,7 +186,7 @@ app.displayEtsy = items => {
   let itemDisplay = items.reduce(
     (html, { etsyImage, etsyTitle, etsyUrl }, index) => {
       let image = `<img src="${etsyImage}" id="clothing-${index}-item " alt="${etsyTitle}">`;
-      let itemUrl = `<a href="${etsyUrl}"><div class="overlay"><p>Click to Shop</p></div>${image}</a>`;
+      let itemUrl = `<a href="${etsyUrl}" target="_blank"><div class="overlay"><p>Click to Shop</p></div>${image} </a>`;
       return html + itemUrl;
     },
     ""
