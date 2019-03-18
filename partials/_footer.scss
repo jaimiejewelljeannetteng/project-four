@@ -3,3 +3,18 @@ footer {
     background: $primaryAccent;
     color: $primaryColour;
 }
+
+footer h3 a {
+    text-decoration: none;
+    color: $primaryColour;
+
+    &:hover {
+        box-shadow: none;
+       color: $secondaryColour;
+        
+    }
+
+    &:focus {
+        box-shadow: none;
+    }
+}
