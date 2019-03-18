@@ -240,19 +240,21 @@ a {
 
 .hide {
   display: none;
-  height: 50px; }
+  height: 197px; }
 
 .show {
   display: block;
   height: 50px; }
 
-.loadingImageContainer {
+#loading {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center;
+  justify-content: center; }
+
+.loadingImage {
   -webkit-animation: infinite-spinning 6s infinite;
   animation: infinite-spinning 6s infinite; }
 
