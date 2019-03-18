@@ -41,8 +41,11 @@
   <body>
     <header class="wrapper">
       <h1>Fashion Forecast</h1>
-      <h2>Enter your city to determine what kind of outfit you should wear today, based on your city's weather!</h2>
-    </header> 
+      <h2>
+        Enter your city to determine what kind of outfit you should wear today,
+        based on your city's weather!
+      </h2>
+    </header>
     <main class="wrapper">
       <form action="#" method="GET" id="userInput">
         <label for="city" class="visuallyHidden">Enter your city</label>
@@ -58,9 +61,13 @@
         <input type="submit" class="button" id="submitButton" value="submit" />
       </form>
       <section class="displayWeather"></section>
-      <section>
+      <section id="loadingSection" class="hide">
         <div id="loading" class="hide loadingImageContainer">
-            <img class="loadingImage" src="./assets/loadingArrows.svg" alt="page is loading">
+          <img
+            class="loadingImage"
+            src="./assets/loadingArrows.svg"
+            alt="page is loading"
+          />
         </div>
       </section>
       <section class="displayOutfit">

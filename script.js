@@ -45,16 +45,16 @@ app.handleSubmit = () => {
   app.getValueOfUserInput();
   //displayWeather will show the API data according to userInput to DOM
   $(".displayWeather").val("");
-  setTimeout(function(){
-    $("#loading").toggleClass("hide");
+  setTimeout(function() {
+    $("#loadingSection").toggleClass("hide");
   }, 500);
   app.loadingPage();
 };
 
-  //shows the loading
+//shows the loading
 app.loadingPage = () => {
-  setTimeout(function () {
-    $("#loading").toggleClass("hide");
+  setTimeout(function() {
+    $("#loadingSection").toggleClass("hide");
   }, 2500);
 };
 // generate button is hidden on page load, show button on submit
@@ -62,7 +62,7 @@ app.generateButton = () => {
   setTimeout(() => {
     $("#generate").show();
     $(".disclaimer").show();
-    }, 3000);
+  }, 3000);
   app.generateClick();
 };
 
@@ -83,16 +83,17 @@ app.getWeather = location => {
       key: app.apiKeyWeather,
       q: location
     }
-  }).done(function (response) {
-    //once data is received, display weather to DOM
-    app.displayWeather(response);
-    // get temperature from response
-    let temperature = response.current.temp_c;
-    //call app.getEtsyParams and pass it the temperature from weather API
-    app.getEtsyParams(temperature);
-    app.smoothScroll();
   })
-    .fail(function () {
+    .done(function(response) {
+      //once data is received, display weather to DOM
+      app.displayWeather(response);
+      // get temperature from response
+      let temperature = response.current.temp_c;
+      //call app.getEtsyParams and pass it the temperature from weather API
+      app.getEtsyParams(temperature);
+      app.smoothScroll();
+    })
+    .fail(function() {
       app.invalidInput();
     });
 }; //app.getWeather ends here

@@ -4,84 +4,79 @@ html {
 }
 
 body {
-    height: 100vh;
-    background: $primaryColour;
-    color: $secondaryColour;
-    font-family: $bodyFont;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-image: url('./assets/backgroundOpacity5.jpg');
-  
+  background: $primaryColour;
+  color: $secondaryColour;
+  font-family: $bodyFont;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-image: url("./assets/backgroundOpacity5.jpg");
 }
 
 .wrapper {
-    max-width: 1600px;
-    margin: 0 10%;
-    padding: 10px 0 0 0;
-    @include fontSize(20);
+  max-width: 1600px;
+  margin: 0 10%;
+  padding: 10px 0 0 0;
+  @include fontSize(20);
 }
 
 main.wrapper {
-    padding-top: 0;
+  padding-top: 0;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 #submitButton,
 #generate {
-    width: 150px;
-    height: 50px;
+  width: 150px;
+  height: 50px;
 }
 
 .button {
-    text-align: center;
-    background: $primaryAccent;
-    color: $primaryColour;
-    text-transform: uppercase;
-    transition: $transitionDetail;
-    border-radius: 10px;
-   
+  text-align: center;
+  background: $primaryAccent;
+  color: $primaryColour;
+  text-transform: uppercase;
+  transition: $transitionDetail;
+  border-radius: 10px;
 }
 
-.button:hover { 
-    background-color: $secondaryAccent;
+.button:hover {
+  background-color: $secondaryAccent;
 }
 
 .hide {
-    opacity: 0;
-    height: 50px;
+  display: none;
+  height: 50px;
 }
 
 .show {
-   opacity: 100;
-   height: 50px;
+  display: block;
+  height: 50px;
 }
 
 .loadingImageContainer {
-    display: flex;
-    justify-content: center;
-    animation: infinite-spinning 6s infinite;
+  display: flex;
+  justify-content: center;
+  animation: infinite-spinning 6s infinite;
 }
 
 @keyframes infinite-spinning {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @include tabletSmall {
-    .wrapper {
-        padding-top: 15%;
-    }
-
-    h2 {
-        margin: 0;
-    }
-
+  .wrapper {
+    padding-top: 15%;
+  }
+  h2 {
+    margin: 0;
+  }
 }
